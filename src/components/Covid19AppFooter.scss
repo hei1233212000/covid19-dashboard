@@ -1,0 +1,12 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.covid19-app-footer {
+  @include transition(margin-left $transitionDuration);
+  background-color: $footerBgColor;
+  padding: 1em 2em;
+
+  .version {
+    text-align: right;
+  }
+}

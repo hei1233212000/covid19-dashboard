@@ -1,26 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import 'primereact/resources/themes/nova-light/theme.css'
+import 'primereact/resources/primereact.min.css'
+import 'primeicons/primeicons.css'
+import 'primeflex/primeflex.css'
+import './layout/layout.scss'
+import Covid19DashboardContainer from './components/Covid19DashboardContainer'
+import Covid19AppFooter from './components/Covid19AppFooter'
+import Covid19AppHeader from './components/Covid19AppHeader'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+export default () => {
+    return <div className="layout-wrapper">
+        <div className="layout-header">
+            <Covid19AppHeader/>
+        </div>
+        <div className="layout-main">
+            <Covid19DashboardContainer/>
+        </div>
+        <div className="layout-footer">
+            <Covid19AppFooter/>
+        </div>
     </div>
-  );
 }
-
-export default App;

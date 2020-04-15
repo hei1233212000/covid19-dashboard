@@ -1,0 +1,24 @@
+.covid19-table {
+  .covid19-table-country-flag {
+    width: 1.5em;
+
+  }
+
+  .p-paginator {
+    padding: 1em;
+
+    .p-dropdown {
+      float: left;
+    }
+
+    .p-paginator-current {
+      float: right;
+    }
+  }
+
+  .covid19-table-column-country {
+    .country-icon {
+      padding: 0.5em;
+    }
+  }
+}

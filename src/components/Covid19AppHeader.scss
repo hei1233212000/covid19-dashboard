@@ -1,0 +1,17 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.covid19-app-header {
+  position: fixed;
+  height: 50px;
+  padding: .5em 1.5em;
+  color: #ffffff;
+  z-index: 999;
+  right: 0;
+  width: 100%;
+  font-weight: bold;
+  font-size: 1.5em;
+  @include clearfix();
+  @include linear-gradient-left(#0388E5, #07BDF4);
+  @include transition(left $transitionDuration);
+}

@@ -1,0 +1,6 @@
+@import 'src/styles/variables';
+@import 'src/styles/mixins';
+
+.covid19-card {
+  @include border-radius($borderRadius);
+}

@@ -1,0 +1,61 @@
+== COVID-19 Dashboard
+
+This is for fun :)
+
+== Prerequisites
+* NodeJS
+
+== Install
+`+yarn install --frozen-lockfile+`
+
+== Start for development
+`+yarn start:dev+`
+
+Runs the app in the development mode. Open http://localhost:3000 to view
+it in the browser.
+
+The page will reload if you make edits. You will also see any lint
+errors in the console.
+
+== Test the project
+`+yarn test+`
+
+Launches the test runner in the interactive watch mode. See the section
+about
+https://facebook.github.io/create-react-app/docs/running-tests[running
+tests] for more information.
+
+== Test the project on CI
+`+yarn test:ci+`
+
+It will force to test all test cases and then quit once completed
+
+== Build the production bundle
+`+yarn build+`
+
+Builds the app for production to the `+build+` folder. It correctly
+bundles React in production mode and optimizes the build for the best
+performance.
+
+The build is minified and the filenames include the hashes. Your app is
+ready to be deployed!
+
+See the section about
+https://facebook.github.io/create-react-app/docs/deployment[deployment]
+for more information.
+
+== run the production bundle
+`+start:prod+`
+
+You have to build the production bundle first
+
+== Demo
+Please visit the dashboard http://covid19-dashboard-20200429.s3-website.ap-east-1.amazonaws.com/[here]
+
+== Remarks:
+* The https://dashboards-dev.sprinklr.com/data/9043/global-covid19-who-gis.json[COVID-19 data] is from https://www.who.int/[WHO]
+* The https://restcountries.eu/rest/v2/all[country information] is from https://restcountries.eu/[REST Countries]
+* The UI is powered by https://reactjs.org/[React] and https://www.primefaces.org/primereact/[PrimeReact]
+
+== TODO
+* Add refresh button or make it able to refresh
