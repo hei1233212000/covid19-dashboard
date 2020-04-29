@@ -5,3 +5,12 @@ install:
   - yarn install --frozen-lockfile
 script:
   - yarn test:ci
+deploy:
+  provider: s3
+  access_key_id: <encrypted access_key_id>
+  secret_access_key: <encrypted secret_access_key>
+  bucket: covid19-dashboard-20200429
+  edge: true # opt in to dpl v2
+branches:
+  only:
+    - master
