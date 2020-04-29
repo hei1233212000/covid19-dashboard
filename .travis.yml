@@ -11,6 +11,7 @@ deploy:
   secret_access_key: <encrypted secret_access_key>
   bucket: covid19-dashboard-20200429
   edge: true # opt in to dpl v2
+  region: ap-east-1
 branches:
   only:
     - master
