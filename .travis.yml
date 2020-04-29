@@ -10,6 +10,7 @@ deploy:
   bucket: covid19-dashboard-20200429
   edge: true # opt in to dpl v2
   region: ap-east-1
+  skip_cleanup: true
   local_dir: ./build
 branches:
   only:
