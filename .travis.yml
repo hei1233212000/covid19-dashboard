@@ -13,7 +13,6 @@ deploy:
   secret_access_key: $AWS_SECRET_ACCESS_KEY
   bucket: $AWS_S3_BUCKET_NAME
   edge: true # opt in to dpl v2
-  region: ap-east-1
   skip_cleanup: true
   local_dir: ./build
 branches:
