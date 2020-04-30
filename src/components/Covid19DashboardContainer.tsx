@@ -36,11 +36,9 @@ const useCountries = (): Country[] => {
     const initialState: Country[] = []
     const [countries, setCountries] = useState(initialState)
     useEffect(() => {
-        if (Utils.isEmpty(countries)) {
-            CountryApi.findCountries()
-                .then(data => setCountries(data))
-        }
-    }, [countries])
+        CountryApi.findCountries()
+            .then(data => setCountries(data))
+    }, [])
     return countries
 }
 
@@ -48,11 +46,9 @@ const useCovid19Data = (): Covid19Data[] => {
     const initialState: Covid19Data[] = []
     const [covid19Data, setCovid19Data] = useState(initialState)
     useEffect(() => {
-        if (Utils.isEmpty(covid19Data)) {
-            Covid19Api.findCovid19Data()
-                .then(data => setCovid19Data(data))
-        }
-    }, [covid19Data])
+        Covid19Api.findCovid19Data()
+            .then(data => setCovid19Data(data))
+    }, [])
     return covid19Data
 }
 
