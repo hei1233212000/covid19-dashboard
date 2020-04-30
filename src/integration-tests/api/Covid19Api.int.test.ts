@@ -1,5 +1,5 @@
-import { Covid19Api } from '../../api/Covid19Api';
-import { Covid19Data } from '../../models/internal/covid19-internal-models';
+import { Covid19Api } from '../../api/Covid19Api'
+import { Covid19Data } from '../../models/internal/covid19-internal-models'
 
 describe('Covid19Api integration test', () => {
     describe('#findCovid19Data', () => {

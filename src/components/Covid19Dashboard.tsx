@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
 import Covid19Table from './Covid19Table'
 import Covid19Counter, { Covid19CounterLevel } from './Covid19Counter'
-import Covid19Card from './Covid19Card';
-import Covid19Chart from './Covid19Chart';
+import Covid19Card from './Covid19Card'
+import Covid19Chart from './Covid19Chart'
 import { Covid19DashboardContext } from '../context/Covid19DashboardContext'
 
 const Covid19Dashboard = (): JSX.Element => {

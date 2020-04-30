@@ -110,9 +110,9 @@ const chartOptions = () => {
 export default Covid19Chart
 
 class Covid19ChartInternalData {
-    readonly monthName: string;
-    confirmCases: number;
-    deathCases: number;
+    readonly monthName: string
+    confirmCases: number
+    deathCases: number
 
     constructor(month: string, confirmCases: number, deathCases: number) {
         this.monthName = month
