@@ -1,0 +1,77 @@
+import { Covid19DashboardContent } from '../Covid19DashboardContext'
+import { Country } from '../../models/internal/country-internal-models'
+import { Covid19Data } from '../../models/internal/covid19-internal-models'
+
+describe('Covid19DashboardContent', () => {
+    const nonEmptyCountries: Country[] = [
+        new Country('Asia', 'AF', 'Afghanistan', 'https://restcountries.eu/data/afg.svg'),
+        new Country('Americas', 'US', 'USA', 'https://restcountries.eu/data/usa.svg'),
+    ]
+    const nonEmptyCovid19Data: Covid19Data[] = [
+        new Covid19Data('AMRO', 'US', 1582502400000, 1, 1, 1, 1),
+        new Covid19Data('AMRO', 'US', 1582588800000, 1, 2, 2, 3),
+        new Covid19Data('AMRO', 'US', 1582675200000, 1, 3, 3, 6),
+        new Covid19Data('EMRO', 'AF', 1587502400000, 2, 2, 10, 10),
+    ]
+    let context: Covid19DashboardContent
+
+    describe('when countries and covid19Data are provided', () => {
+        beforeEach(() => {
+            context = new Covid19DashboardContent(nonEmptyCountries, nonEmptyCovid19Data)
+        })
+
+        it('should contain countries', () => {
+            expect(context.countries).toEqual(nonEmptyCountries)
+        })
+
+        it('should contain covid19Data', () => {
+            expect(context.covid19Data).toEqual(nonEmptyCovid19Data)
+        })
+
+        it('should extract latestCovid19Data', () => {
+            const latestCovid19Data: Covid19Data[] = [
+                nonEmptyCovid19Data[nonEmptyCovid19Data.length - 2],
+                nonEmptyCovid19Data[nonEmptyCovid19Data.length - 1],
+            ]
+            expect(context.latestCovid19Data).toEqual(latestCovid19Data)
+        })
+
+        it('should extract earliestRecordTimestamp', () => {
+            expect(context.earliestRecordTimestamp).toEqual(1582502400000)
+        })
+
+        it('should extract latestRecordTimestamp', () => {
+            expect(context.latestRecordTimestamp).toEqual(1587502400000)
+        })
+
+        it('should extract totalCumulativeConfirms', () => {
+            expect(context.totalCumulativeConfirms).toEqual(16)
+        })
+
+        it('should extract totalCumulativeDeaths', () => {
+            expect(context.totalCumulativeDeaths).toEqual(5)
+        })
+
+        it('should extract numberOfCountriesWithCases', () => {
+            expect(context.numberOfCountriesWithCases).toEqual(2)
+        })
+
+        it('should be ready', () => {
+            expect(context.ready).toEqual(true)
+        })
+    })
+
+    describe.each([
+        [[], []],
+        [[], nonEmptyCovid19Data],
+        [nonEmptyCountries, []],
+    ])('when countries is %o and covid19Data is %o', (countries: Country[], covid19Data: Covid19Data[]) => {
+        beforeEach(() => {
+            context = new Covid19DashboardContent(countries, covid19Data)
+        })
+
+        it('should NOT be ready', () => {
+            expect(context.ready).toEqual(false)
+        })
+    })
+})
