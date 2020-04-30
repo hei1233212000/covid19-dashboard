@@ -38,21 +38,19 @@ describe('Covid19Api', () => {
             fetchMock.mockOnce(JSON.stringify(externalCovid19DataList))
         })
 
-        it('should return COVID-19 data list', done => {
-            Covid19Api.findCovid19Data().then((covid19DataList: Covid19Data[]) => {
-                expect(covid19DataList).toHaveLength(externalCovid19DataList.rows.length)
+        it('should return COVID-19 data list', async () => {
+            const covid19DataList = await Covid19Api.findCovid19Data()
+            expect(covid19DataList).toHaveLength(externalCovid19DataList.rows.length)
 
-                covid19DataList.forEach((covid19Data: Covid19Data, index: number) => {
-                    const externalCovid19Data = externalCovid19DataList.rows[index]
-                    expect(covid19Data.region).toEqual(externalCovid19Data[2])
-                    expect(covid19Data.countryCode).toEqual(externalCovid19Data[1])
-                    expect(covid19Data.timestampInMillisecond).toEqual(externalCovid19Data[0])
-                    expect(covid19Data.numberOfDeaths).toEqual(externalCovid19Data[3])
-                    expect(covid19Data.numberOfCumulativeDeaths).toEqual(externalCovid19Data[4])
-                    expect(covid19Data.numberOfConfirms).toEqual(externalCovid19Data[5])
-                    expect(covid19Data.numberOfCumulativeConfirms).toEqual(externalCovid19Data[6])
-                })
-                done()
+            covid19DataList.forEach((covid19Data: Covid19Data, index: number) => {
+                const externalCovid19Data = externalCovid19DataList.rows[index]
+                expect(covid19Data.region).toEqual(externalCovid19Data[2])
+                expect(covid19Data.countryCode).toEqual(externalCovid19Data[1])
+                expect(covid19Data.timestampInMillisecond).toEqual(externalCovid19Data[0])
+                expect(covid19Data.numberOfDeaths).toEqual(externalCovid19Data[3])
+                expect(covid19Data.numberOfCumulativeDeaths).toEqual(externalCovid19Data[4])
+                expect(covid19Data.numberOfConfirms).toEqual(externalCovid19Data[5])
+                expect(covid19Data.numberOfCumulativeConfirms).toEqual(externalCovid19Data[6])
             })
         })
     })
