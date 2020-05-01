@@ -1,8 +1,8 @@
-import { Covid19DashboardContent } from '../Covid19DashboardContext'
+import { Covid19DashboardState } from '../Covid19DashboardContext'
 import { Country } from '../../models/internal/country-internal-models'
 import { Covid19Data } from '../../models/internal/covid19-internal-models'
 
-describe('Covid19DashboardContent', () => {
+describe('Covid19DashboardState', () => {
     const nonEmptyCountries: Country[] = [
         new Country('Asia', 'AF', 'Afghanistan', 'https://restcountries.eu/data/afg.svg'),
         new Country('Americas', 'US', 'USA', 'https://restcountries.eu/data/usa.svg'),
@@ -13,19 +13,20 @@ describe('Covid19DashboardContent', () => {
         new Covid19Data('AMRO', 'US', 1582675200000, 1, 3, 3, 6),
         new Covid19Data('EMRO', 'AF', 1587502400000, 2, 2, 10, 10),
     ]
-    let context: Covid19DashboardContent
+    const dummyRefreshCovid19DataFunction: () => void = () => {}
+    let state: Covid19DashboardState
 
     describe('when countries and covid19Data are provided', () => {
         beforeEach(() => {
-            context = new Covid19DashboardContent(nonEmptyCountries, nonEmptyCovid19Data)
+            state = new Covid19DashboardState(nonEmptyCountries, nonEmptyCovid19Data, dummyRefreshCovid19DataFunction)
         })
 
         it('should contain countries', () => {
-            expect(context.countries).toEqual(nonEmptyCountries)
+            expect(state.countries).toEqual(nonEmptyCountries)
         })
 
         it('should contain covid19Data', () => {
-            expect(context.covid19Data).toEqual(nonEmptyCovid19Data)
+            expect(state.covid19Data).toEqual(nonEmptyCovid19Data)
         })
 
         it('should extract latestCovid19Data', () => {
@@ -33,31 +34,35 @@ describe('Covid19DashboardContent', () => {
                 nonEmptyCovid19Data[nonEmptyCovid19Data.length - 2],
                 nonEmptyCovid19Data[nonEmptyCovid19Data.length - 1],
             ]
-            expect(context.latestCovid19Data).toEqual(latestCovid19Data)
+            expect(state.latestCovid19Data).toEqual(latestCovid19Data)
         })
 
         it('should extract earliestRecordTimestamp', () => {
-            expect(context.earliestRecordTimestamp).toEqual(1582502400000)
+            expect(state.earliestRecordTimestamp).toEqual(1582502400000)
         })
 
         it('should extract latestRecordTimestamp', () => {
-            expect(context.latestRecordTimestamp).toEqual(1587502400000)
+            expect(state.latestRecordTimestamp).toEqual(1587502400000)
         })
 
         it('should extract totalCumulativeConfirms', () => {
-            expect(context.totalCumulativeConfirms).toEqual(16)
+            expect(state.totalCumulativeConfirms).toEqual(16)
         })
 
         it('should extract totalCumulativeDeaths', () => {
-            expect(context.totalCumulativeDeaths).toEqual(5)
+            expect(state.totalCumulativeDeaths).toEqual(5)
         })
 
         it('should extract numberOfCountriesWithCases', () => {
-            expect(context.numberOfCountriesWithCases).toEqual(2)
+            expect(state.numberOfCountriesWithCases).toEqual(2)
         })
 
         it('should be ready', () => {
-            expect(context.ready).toEqual(true)
+            expect(state.ready).toEqual(true)
+        })
+
+        it('should contain refreshCovid19DataFunction', () => {
+            expect(state.refreshCovid19DataFunction).toEqual(dummyRefreshCovid19DataFunction)
         })
     })
 
@@ -67,11 +72,11 @@ describe('Covid19DashboardContent', () => {
         [nonEmptyCountries, []],
     ])('when countries is %o and covid19Data is %o', (countries: Country[], covid19Data: Covid19Data[]) => {
         beforeEach(() => {
-            context = new Covid19DashboardContent(countries, covid19Data)
+            state = new Covid19DashboardState(countries, covid19Data, dummyRefreshCovid19DataFunction)
         })
 
         it('should NOT be ready', () => {
-            expect(context.ready).toEqual(false)
+            expect(state.ready).toEqual(false)
         })
     })
 })

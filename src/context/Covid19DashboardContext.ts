@@ -3,9 +3,13 @@ import { Covid19Data } from '../models/internal/covid19-internal-models'
 import Utils from '../utils/utils'
 import { createContext } from 'react'
 
-export const Covid19DashboardContext = createContext({} as Covid19DashboardContent)
+export const Covid19DashboardContext = createContext({} as Covid19DashboardState)
 
-export class Covid19DashboardContent {
+export interface RefreshCovid19DataFunction {
+    (manualRefresh?: boolean): void
+}
+
+export class Covid19DashboardState {
     readonly countries: Country[]
     readonly covid19Data: Covid19Data[]
     readonly latestCovid19Data: Covid19Data[]
@@ -15,13 +19,16 @@ export class Covid19DashboardContent {
     readonly totalCumulativeDeaths: number
     readonly numberOfCountriesWithCases: number
     readonly ready: boolean
+    readonly refreshCovid19DataFunction: RefreshCovid19DataFunction
 
     constructor(
         countries: Country[],
-        covid19Data: Covid19Data[]
+        covid19Data: Covid19Data[],
+        refreshCovid19DataFunction: RefreshCovid19DataFunction
     ) {
         this.countries = countries
         this.covid19Data = covid19Data
+        this.refreshCovid19DataFunction = refreshCovid19DataFunction
 
         this.earliestRecordTimestamp = this.findTimestamp(this.covid19Data, Math.min)
         this.latestRecordTimestamp = this.findTimestamp(this.covid19Data, Math.max)

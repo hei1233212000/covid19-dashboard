@@ -4,41 +4,45 @@ import Covid19Counter, { Covid19CounterLevel } from './Covid19Counter'
 import Covid19Card from './Covid19Card'
 import Covid19Chart from './Covid19Chart'
 import { Covid19DashboardContext } from '../context/Covid19DashboardContext'
+import Covid19RefreshButton from './Covid19RefreshButton'
 
 const Covid19Dashboard = (): JSX.Element => {
-    const covid19DashboardContent = useContext(Covid19DashboardContext)
+    const covid19DashboardState = useContext(Covid19DashboardContext)
 
     return <div className="p-grid p-fluid">
+        <div className="p-col-12">
+            <Covid19RefreshButton refreshCovid19DataFunction={covid19DashboardState.refreshCovid19DataFunction}/>
+        </div>
         <div className="p-col-12 p-lg-4">
             <Covid19Counter title="Confirmed cases" level={Covid19CounterLevel.Warning}
-                            earliestRecordTimestamp={covid19DashboardContent.earliestRecordTimestamp}
-                            latestRecordTimestamp={covid19DashboardContent.latestRecordTimestamp}
-                            count={covid19DashboardContent.totalCumulativeConfirms}/>
+                            earliestRecordTimestamp={covid19DashboardState.earliestRecordTimestamp}
+                            latestRecordTimestamp={covid19DashboardState.latestRecordTimestamp}
+                            count={covid19DashboardState.totalCumulativeConfirms}/>
         </div>
         <div className="p-col-12 p-lg-4">
             <Covid19Counter title="Confirmed deaths" level={Covid19CounterLevel.Danger}
-                            earliestRecordTimestamp={covid19DashboardContent.earliestRecordTimestamp}
-                            latestRecordTimestamp={covid19DashboardContent.latestRecordTimestamp}
-                            count={covid19DashboardContent.totalCumulativeDeaths}/>
+                            earliestRecordTimestamp={covid19DashboardState.earliestRecordTimestamp}
+                            latestRecordTimestamp={covid19DashboardState.latestRecordTimestamp}
+                            count={covid19DashboardState.totalCumulativeDeaths}/>
         </div>
         <div className="p-col-12 p-lg-4">
             <Covid19Counter title="Countries, areas or territories with cases" level={Covid19CounterLevel.Normal}
-                            earliestRecordTimestamp={covid19DashboardContent.earliestRecordTimestamp}
-                            latestRecordTimestamp={covid19DashboardContent.latestRecordTimestamp}
-                            count={covid19DashboardContent.numberOfCountriesWithCases}/>
+                            earliestRecordTimestamp={covid19DashboardState.earliestRecordTimestamp}
+                            latestRecordTimestamp={covid19DashboardState.latestRecordTimestamp}
+                            count={covid19DashboardState.numberOfCountriesWithCases}/>
         </div>
         <div className="p-col-12 p-lg-6">
             <Covid19Card title="Cumulative cases">
-                <Covid19Table countries={covid19DashboardContent.countries}
-                              covid19Data={covid19DashboardContent.latestCovid19Data}/>
+                <Covid19Table countries={covid19DashboardState.countries}
+                              covid19Data={covid19DashboardState.latestCovid19Data}/>
             </Covid19Card>
         </div>
         <div className="p-col-12 p-lg-6">
             <Covid19Card title="Trend">
                 <Covid19Chart
-                    covid19Data={covid19DashboardContent.covid19Data}
-                    earliestRecordTimestamp={covid19DashboardContent.earliestRecordTimestamp}
-                    latestRecordTimestamp={covid19DashboardContent.latestRecordTimestamp}
+                    covid19Data={covid19DashboardState.covid19Data}
+                    earliestRecordTimestamp={covid19DashboardState.earliestRecordTimestamp}
+                    latestRecordTimestamp={covid19DashboardState.latestRecordTimestamp}
                 />
             </Covid19Card>
         </div>

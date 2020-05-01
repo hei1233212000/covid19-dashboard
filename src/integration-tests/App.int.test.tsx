@@ -63,6 +63,10 @@ describe('App integration test', () => {
     it('should show the project version', () => {
         expect(screen.getByText(`version: ${packageJson.version}`)).toBeInTheDocument()
     })
+
+    it('should have "refresh" button', () => {
+        expect(screen.getByText('Refresh')).toBeInTheDocument()
+    })
 })
 
 const countries: ExternalCountry[] = [
