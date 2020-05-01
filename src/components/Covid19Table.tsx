@@ -55,12 +55,12 @@ const Covid19Table = (props: Covid19TableProps): JSX.Element => {
                     filter filterMatchMode="custom" filterFunction={filterCountry} filterPlaceholder="Country"
             />
             <Column field="numberOfCumulativeConfirms" header="Cumulative Confirms" sortable
-                    body={numberOfCumulativeConfirmsBodyTemplate} style={{width: '20%'}}
-                    filter filterMatchMode="gte" filterPlaceholder="Minimum"
+                    body={numberOfCumulativeConfirmsBodyTemplate} style={{width: '25%'}}
+                    filter filterMatchMode="gte" filterPlaceholder="Min."
             />
             <Column field="numberOfCumulativeDeaths" header="Cumulative Deaths" sortable
-                    body={numberOfCumulativeDeathsBodyTemplate} style={{width: '20%'}}
-                    filter filterMatchMode="gte" filterPlaceholder="Minimum"
+                    body={numberOfCumulativeDeathsBodyTemplate} style={{width: '25%'}}
+                    filter filterMatchMode="gte" filterPlaceholder="Min."
             />
         </DataTable>
     </div>
