@@ -3,27 +3,40 @@ import { act } from 'react-dom/test-utils'
 import { cleanup, render, screen } from '@testing-library/react'
 import Covid19RefreshButton from '../Covid19RefreshButton'
 import { RefreshCovid19DataFunction } from '../../context/Covid19DashboardContext'
+import Utils from '../../utils/Utils'
 
 describe('Covid19RefreshButton', () => {
     let mockedRefreshCovid19DataFunction: RefreshCovid19DataFunction
+    const lastUpdatedTimeInMilliseconds = 1579046412345
     let capturedManualRefresh: boolean | undefined = undefined
     let refreshButton: HTMLElement
-    const expectedLabel = 'Refresh'
+    const refreshIconText = 'Refresh'
 
     beforeEach(async () => {
         mockedRefreshCovid19DataFunction = jest.fn((manualRefresh?: boolean) => {
             capturedManualRefresh = manualRefresh
         })
         await act(async () => {
-            render(<Covid19RefreshButton refreshCovid19DataFunction={mockedRefreshCovid19DataFunction}/>)
+            render(<Covid19RefreshButton
+                refreshCovid19DataFunction={mockedRefreshCovid19DataFunction}
+                lastUpdatedTimeInMilliseconds={lastUpdatedTimeInMilliseconds}
+            />)
         })
-        refreshButton = screen.getByText(expectedLabel)
+        refreshButton = screen.getByText(refreshIconText)
     })
 
     afterEach(cleanup)
 
-    it(`should have label "${expectedLabel}"`, () => {
+    it(`should have text "${refreshIconText}"`, () => {
         expect(refreshButton).toBeInTheDocument()
+    })
+
+    it('should have message to show the last updated time', () => {
+        const offset = Utils.localOffset()
+        const dateTimeFormat = 'DD-MMM-YYYY HH:mm:ss'
+        const lastUpdatedTime = Utils.timestampToStringWithOffset(lastUpdatedTimeInMilliseconds, offset, dateTimeFormat)
+        const lastUpdatedTimeMessage = `Last updated time: ${lastUpdatedTime}`
+        expect(screen.getByText(lastUpdatedTimeMessage)).toBeInTheDocument()
     })
 
     describe('when we click it', () => {

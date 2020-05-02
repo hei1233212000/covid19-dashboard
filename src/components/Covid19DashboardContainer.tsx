@@ -11,11 +11,13 @@ import {
     RefreshCovid19DataFunction
 } from '../context/Covid19DashboardContext'
 import EnvVariables from '../env/EnvVariables'
+import Utils from '../utils/Utils'
 
 const Covid19DashboardContainer = (): JSX.Element => {
     const countries = useCountries()
     const {covid19Data, refreshCovid19DataFunction} = useCovid19Data()
-    const covid19DashboardState = new Covid19DashboardState(countries, covid19Data, refreshCovid19DataFunction)
+    const lastUpdatedTimestamp = Utils.currentUtcTimestampInMilliseconds()
+    const covid19DashboardState = new Covid19DashboardState(countries, covid19Data, refreshCovid19DataFunction, lastUpdatedTimestamp)
     useAutoRefreshCovid19Data(covid19DashboardState, EnvVariables.refreshCovid19DataIntervalInMilliseconds)
 
     if (covid19DashboardState.ready) {

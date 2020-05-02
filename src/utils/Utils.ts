@@ -38,4 +38,8 @@ export default class Utils {
     static minuteToMilliseconds = (minutes: number): number => {
         return minutes * 60 * 1000
     }
+
+    static currentUtcTimestampInMilliseconds = (): number => {
+        return moment.utc().valueOf()
+    }
 }

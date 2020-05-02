@@ -14,11 +14,12 @@ describe('Covid19DashboardState', () => {
         new Covid19Data('EMRO', 'AF', 1587502400000, 2, 2, 10, 10),
     ]
     const dummyRefreshCovid19DataFunction: () => void = () => {}
+    const fakeLastUpdatedTimestamp = 1
     let state: Covid19DashboardState
 
     describe('when countries and covid19Data are provided', () => {
         beforeEach(() => {
-            state = new Covid19DashboardState(nonEmptyCountries, nonEmptyCovid19Data, dummyRefreshCovid19DataFunction)
+            state = new Covid19DashboardState(nonEmptyCountries, nonEmptyCovid19Data, dummyRefreshCovid19DataFunction, fakeLastUpdatedTimestamp)
         })
 
         it('should contain countries', () => {
@@ -64,6 +65,10 @@ describe('Covid19DashboardState', () => {
         it('should contain refreshCovid19DataFunction', () => {
             expect(state.refreshCovid19DataFunction).toEqual(dummyRefreshCovid19DataFunction)
         })
+
+        it('should contain fakeLastUpdatedTimestamp', () => {
+            expect(state.lastUpdatedTimestamp).toEqual(fakeLastUpdatedTimestamp)
+        })
     })
 
     describe.each([
@@ -72,7 +77,7 @@ describe('Covid19DashboardState', () => {
         [nonEmptyCountries, []],
     ])('when countries is %o and covid19Data is %o', (countries: Country[], covid19Data: Covid19Data[]) => {
         beforeEach(() => {
-            state = new Covid19DashboardState(countries, covid19Data, dummyRefreshCovid19DataFunction)
+            state = new Covid19DashboardState(countries, covid19Data, dummyRefreshCovid19DataFunction, fakeLastUpdatedTimestamp)
         })
 
         it('should NOT be ready', () => {

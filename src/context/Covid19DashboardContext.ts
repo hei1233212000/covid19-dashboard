@@ -20,15 +20,18 @@ export class Covid19DashboardState {
     readonly numberOfCountriesWithCases: number
     readonly ready: boolean
     readonly refreshCovid19DataFunction: RefreshCovid19DataFunction
+    readonly lastUpdatedTimestamp: number
 
     constructor(
         countries: Country[],
         covid19Data: Covid19Data[],
-        refreshCovid19DataFunction: RefreshCovid19DataFunction
+        refreshCovid19DataFunction: RefreshCovid19DataFunction,
+        lastUpdatedTimestamp: number
     ) {
         this.countries = countries
         this.covid19Data = covid19Data
         this.refreshCovid19DataFunction = refreshCovid19DataFunction
+        this.lastUpdatedTimestamp = lastUpdatedTimestamp
 
         this.earliestRecordTimestamp = this.findTimestamp(this.covid19Data, Math.min)
         this.latestRecordTimestamp = this.findTimestamp(this.covid19Data, Math.max)

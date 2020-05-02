@@ -11,7 +11,10 @@ const Covid19Dashboard = (): JSX.Element => {
 
     return <div className="p-grid p-fluid">
         <div className="p-col-12">
-            <Covid19RefreshButton refreshCovid19DataFunction={covid19DashboardState.refreshCovid19DataFunction}/>
+            <Covid19RefreshButton
+                refreshCovid19DataFunction={covid19DashboardState.refreshCovid19DataFunction}
+                lastUpdatedTimeInMilliseconds={covid19DashboardState.lastUpdatedTimestamp}
+            />
         </div>
         <div className="p-col-12 p-lg-4" data-testid="confirmed-cases-counter">
             <Covid19Counter title="Confirmed cases" level={Covid19CounterLevel.Warning}

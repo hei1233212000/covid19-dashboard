@@ -8,6 +8,7 @@ import { Covid19Data as ExternalCovid19Data } from '../models/external/covid19-e
 import { enableFetchMocks } from 'jest-fetch-mock'
 import 'jest-canvas-mock'
 import packageJson from '../../package.json'
+import Utils from '../utils/Utils';
 
 enableFetchMocks()
 
@@ -110,6 +111,15 @@ describe('App integration test', () => {
 
     it('should have "refresh" button', () => {
         expect(screen.getByText('Refresh')).toBeInTheDocument()
+    })
+
+    it('should have a message to show the last updatd time', () => {
+        const offset = Utils.localOffset()
+        const dateTimeFormat = 'DD-MMM-YYYY HH:mm:ss'
+        const currentTimestampInUtc = Utils.currentUtcTimestampInMilliseconds()
+        const lastUpdatedTime = Utils.timestampToStringWithOffset(currentTimestampInUtc, offset, dateTimeFormat)
+        const lastUpdatedTimeMessage = `Last updated time: ${lastUpdatedTime}`
+        expect(screen.getByText(lastUpdatedTimeMessage)).toBeInTheDocument()
     })
 })
 
