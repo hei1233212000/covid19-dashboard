@@ -13,25 +13,28 @@ const Covid19Dashboard = (): JSX.Element => {
         <div className="p-col-12">
             <Covid19RefreshButton refreshCovid19DataFunction={covid19DashboardState.refreshCovid19DataFunction}/>
         </div>
-        <div className="p-col-12 p-lg-4">
+        <div className="p-col-12 p-lg-4" data-testid="confirmed-cases-counter">
             <Covid19Counter title="Confirmed cases" level={Covid19CounterLevel.Warning}
                             earliestRecordTimestamp={covid19DashboardState.earliestRecordTimestamp}
                             latestRecordTimestamp={covid19DashboardState.latestRecordTimestamp}
-                            count={covid19DashboardState.totalCumulativeConfirms}/>
+                            count={covid19DashboardState.totalCumulativeConfirms}
+            />
         </div>
-        <div className="p-col-12 p-lg-4">
+        <div className="p-col-12 p-lg-4" data-testid="confirmed-deaths-counter">
             <Covid19Counter title="Confirmed deaths" level={Covid19CounterLevel.Danger}
                             earliestRecordTimestamp={covid19DashboardState.earliestRecordTimestamp}
                             latestRecordTimestamp={covid19DashboardState.latestRecordTimestamp}
-                            count={covid19DashboardState.totalCumulativeDeaths}/>
+                            count={covid19DashboardState.totalCumulativeDeaths}
+            />
         </div>
-        <div className="p-col-12 p-lg-4">
+        <div className="p-col-12 p-lg-4" data-testid="countries-areas-territories-counter">
             <Covid19Counter title="Countries, areas or territories with cases" level={Covid19CounterLevel.Normal}
                             earliestRecordTimestamp={covid19DashboardState.earliestRecordTimestamp}
                             latestRecordTimestamp={covid19DashboardState.latestRecordTimestamp}
-                            count={covid19DashboardState.numberOfCountriesWithCases}/>
+                            count={covid19DashboardState.numberOfCountriesWithCases}
+            />
         </div>
-        <div className="p-col-12 p-lg-6">
+        <div className="p-col-12 p-lg-6" data-testid="cumulative-cases">
             <Covid19Card title="Cumulative cases">
                 <Covid19Table countries={covid19DashboardState.countries}
                               covid19Data={covid19DashboardState.latestCovid19Data}/>

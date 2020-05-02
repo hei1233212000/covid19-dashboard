@@ -43,7 +43,7 @@ const Covid19Table = (props: Covid19TableProps): JSX.Element => {
         {field: 'numberOfCumulativeConfirms', order: -1}
     ]
 
-    return <div className="covid19-table">
+    return <div className="covid19-table" data-testid="covid19-table">
         <DataTable value={props.covid19Data} emptyMessage="No data found"
                    sortMode="multiple" multiSortMeta={multiSortMeta} removableSort
                    rowHover resizableColumns

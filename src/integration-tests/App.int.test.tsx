@@ -1,5 +1,5 @@
 import React from 'react'
-import { cleanup, render, screen } from '@testing-library/react'
+import { cleanup, getByText, render, screen, getByTestId } from '@testing-library/react'
 import { waitFor } from '@testing-library/dom'
 import App from '../App'
 import { act } from 'react-dom/test-utils'
@@ -44,16 +44,60 @@ describe('App integration test', () => {
         expect(screen.getByText('Powered by React and PrimeReact')).toBeInTheDocument()
     })
 
-    it.each([
-        ['Confirmed cases'],
-        ['Confirmed deaths'],
-        ['Countries, areas or territories with cases'],
-    ])('should have "%s" counter', (counterText: string) => {
-        expect(screen.getByText(counterText)).toBeInTheDocument()
+    describe.each([
+        ['confirmed-cases-counter', 'Confirmed cases', '4'],
+        ['confirmed-deaths-counter', 'Confirmed deaths', '1'],
+        ['countries-areas-territories-counter', 'Countries, areas or territories with cases', '2'],
+    ])('when we look at the counter with id "%s"', (
+        counterId: string,
+        expectedCounterLabel: string,
+        expectedCount: string
+    ) => {
+        let counter: HTMLElement
+
+        beforeEach(() => {
+            counter = screen.getByTestId(counterId)
+        })
+
+        it(`should have label "${expectedCounterLabel}"`, () => {
+            expect(getByText(counter, expectedCounterLabel)).toBeInTheDocument()
+        })
+
+        it(`should display the count as "${expectedCount}"`, () => {
+            expect(getByText(counter, expectedCount)).toBeInTheDocument()
+        })
+
+        it('should display the count duration', () => {
+            expect(getByText(counter, '14-Jan-2020 to 21-Jan-2020')).toBeInTheDocument()
+        })
     })
 
-    it('should have "Cumulative cases" table', () => {
-        expect(screen.getByText('Cumulative cases')).toBeInTheDocument()
+    describe('when we look at "Cumulative cases"', () => {
+        let cumulativeCases: HTMLElement
+
+        beforeEach(() => {
+            cumulativeCases = screen.getByTestId('cumulative-cases')
+        })
+
+        it('should show correct label', () => {
+            expect(getByText(cumulativeCases, 'Cumulative cases')).toBeInTheDocument()
+        })
+
+        describe('when we look inside in it', () => {
+            let covid19Table: HTMLElement
+
+            beforeEach(() => {
+                covid19Table = getByTestId(cumulativeCases, 'covid19-table')
+            })
+
+            it.each([
+                ['Country'],
+                ['Cumulative Confirms'],
+                ['Cumulative Deaths'],
+            ])('should have "%s" column', (columnLabel: string) => {
+                expect(getByText(covid19Table, columnLabel)).toBeInTheDocument()
+            })
+        })
     })
 
     it('should have "Trend" chart', () => {
@@ -293,10 +337,10 @@ const covid19Data: ExternalCovid19Data = {
             1579046400000,
             "JP",
             "WPRO",
-            0,
-            0,
-            0,
-            1
+            1,
+            1,
+            2,
+            3
         ]
     ]
 }
