@@ -49,7 +49,7 @@ const Covid19Table = (props: Covid19TableProps): JSX.Element => {
                    rowHover resizableColumns
                    paginator alwaysShowPaginator rows={10} rowsPerPageOptions={[10, 25, 50, 100, 200, 300]}
                    paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport"
-                   currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                   currentPageReportTemplate="{first} to {last} of {totalRecords} entries"
         >
             <Column field="countryCode" header="Countries, areas or territories" body={countryBodyTemplate}
                     filter filterMatchMode="custom" filterFunction={filterCountry} filterPlaceholder="Country"
