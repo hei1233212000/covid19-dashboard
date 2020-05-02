@@ -26,6 +26,8 @@ describe('App integration test', () => {
             }
         })
 
+        Utils.currentUtcTimestampInMilliseconds = jest.fn().mockReturnValue(1579478400000)
+
         await act(async () => {
             render(<App/>)
         })
