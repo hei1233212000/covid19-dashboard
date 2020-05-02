@@ -1,7 +1,7 @@
 import React from 'react'
 import Covid19Card from './Covid19Card'
 import './Covid19Counter.scss'
-import Utils from '../utils/utils'
+import Utils from '../utils/Utils'
 
 export enum Covid19CounterLevel {
     Normal,

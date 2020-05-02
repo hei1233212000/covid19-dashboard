@@ -1,4 +1,4 @@
-import { capitalize as lodashCapitalize, groupBy as lodashGroupBy, isEmpty as lodashIsEmpty } from 'lodash'
+import { groupBy as lodashGroupBy, isEmpty as lodashIsEmpty } from 'lodash'
 import moment from 'moment'
 
 export default class Utils {
@@ -8,14 +8,6 @@ export default class Utils {
 
     static isNotEmpty(obj: any): boolean {
         return !Utils.isEmpty(obj)
-    }
-
-    static capitalize(anyString: string): string {
-        return lodashCapitalize(anyString)
-    }
-
-    static timestampToString(timestampInMillisecond: number, dateFormat: string): string {
-        return moment(timestampInMillisecond).utc().format(dateFormat)
     }
 
     static timestampToStringWithOffset(timestampInMillisecond: number, offset: number, dateFormat: string): string {

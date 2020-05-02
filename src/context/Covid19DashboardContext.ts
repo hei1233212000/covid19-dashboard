@@ -1,6 +1,6 @@
 import { Country } from '../models/internal/country-internal-models'
 import { Covid19Data } from '../models/internal/covid19-internal-models'
-import Utils from '../utils/utils'
+import Utils from '../utils/Utils'
 import { createContext } from 'react'
 
 export const Covid19DashboardContext = createContext({} as Covid19DashboardState)

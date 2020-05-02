@@ -1,4 +1,4 @@
-import Utils from '../utils'
+import Utils from '../Utils'
 import { createDummyObject, DummyObject } from '../../test/model/DummyObject'
 
 describe('utils', () => {
@@ -24,32 +24,6 @@ describe('utils', () => {
             it(`#isNotEmpty should return "${!expectedIsEmptyOutput}"`, () => {
                 expect(Utils.isNotEmpty(input)).toEqual(!expectedIsEmptyOutput)
             })
-        })
-    })
-
-    describe('#capitalize', () => {
-        describe.each([
-            ['', ''],
-            ['any', 'Any'],
-            ['Any', 'Any'],
-            ['ANY', 'Any'],
-            ['lowerCase', 'Lowercase'],
-            ['UpwerCase', 'Upwercase'],
-            ['two words', 'Two words'],
-        ])('input: "%s"', (anything: string, expectedResult: string) => {
-            it(`should return "${expectedResult}"`, () => {
-                expect(Utils.capitalize(anything)).toEqual(expectedResult)
-            })
-        })
-    })
-
-    describe('#timestampToString', () => {
-        it('should able to convert timestamp to string', () => {
-            // Tuesday, April 14, 2020 12:00:00 AM GMT
-            const timestampInMillisecond = 1586822400000
-            const dateFormat = 'DD-MMM-YYYY HH:mm:ss'
-            const result = Utils.timestampToString(timestampInMillisecond, dateFormat)
-            expect(result).toEqual('14-Apr-2020 00:00:00')
         })
     })
 

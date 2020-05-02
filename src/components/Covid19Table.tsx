@@ -4,7 +4,7 @@ import { Covid19Data } from '../models/internal/covid19-internal-models'
 import { DataTable } from 'primereact/datatable'
 import { Column } from 'primereact/column'
 import './Covid19Table.scss'
-import Utils from '../utils/utils'
+import Utils from '../utils/Utils'
 
 interface Covid19TableProps {
     countries: Country[],

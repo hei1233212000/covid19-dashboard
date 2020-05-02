@@ -1,7 +1,7 @@
 import React from 'react'
 import { Covid19Data } from '../models/internal/covid19-internal-models'
 import { Chart } from 'primereact/chart'
-import Utils from '../utils/utils'
+import Utils from '../utils/Utils'
 
 interface Covid19ChartProps {
     covid19Data: Covid19Data[],
