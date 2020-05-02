@@ -94,7 +94,7 @@ describe('App integration test', () => {
             })
 
             it.each([
-                ['Country'],
+                ['Countries, areas or territories'],
                 ['Cumulative Confirms'],
                 ['Cumulative Deaths'],
             ])('should have "%s" column', (columnLabel: string) => {

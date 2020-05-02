@@ -51,7 +51,7 @@ const Covid19Table = (props: Covid19TableProps): JSX.Element => {
                    paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport"
                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
         >
-            <Column field="countryCode" header="Country" body={countryBodyTemplate}
+            <Column field="countryCode" header="Countries, areas or territories" body={countryBodyTemplate}
                     filter filterMatchMode="custom" filterFunction={filterCountry} filterPlaceholder="Country"
             />
             <Column field="numberOfCumulativeConfirms" header="Cumulative Confirms" sortable
