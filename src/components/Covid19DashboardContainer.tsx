@@ -10,11 +10,13 @@ import {
     Covid19DashboardState,
     RefreshCovid19DataFunction
 } from '../context/Covid19DashboardContext'
+import EnvVariables from '../env/EnvVariables'
 
 const Covid19DashboardContainer = (): JSX.Element => {
     const countries = useCountries()
     const {covid19Data, refreshCovid19DataFunction} = useCovid19Data()
     const covid19DashboardState = new Covid19DashboardState(countries, covid19Data, refreshCovid19DataFunction)
+    useAutoRefreshCovid19Data(covid19DashboardState, EnvVariables.refreshCovid19DataIntervalInMilliseconds)
 
     if (covid19DashboardState.ready) {
         return <Covid19DashboardContext.Provider value={covid19DashboardState}>
@@ -52,11 +54,25 @@ const useCovid19Data = (): Covid19DataAndCallback => {
     return new Covid19DataAndCallback(covid19Data, refreshCovid19Data)
 }
 
+const useAutoRefreshCovid19Data = (
+    covid19DashboardState: Covid19DashboardState,
+    refreshIntervalInMilliseconds: number
+) => {
+    useEffect(() => {
+        if (covid19DashboardState.ready) {
+            const intervalId = setInterval(() => {
+                covid19DashboardState.refreshCovid19DataFunction()
+            }, refreshIntervalInMilliseconds)
+            return () => clearInterval(intervalId)
+        }
+    }, [covid19DashboardState, refreshIntervalInMilliseconds])
+}
+
 class Covid19DataAndCallback {
     readonly covid19Data: Covid19Data[]
-    readonly refreshCovid19DataFunction: () => void
+    readonly refreshCovid19DataFunction: RefreshCovid19DataFunction
 
-    constructor(covid19Data: Covid19Data[], refreshCovid19Data: () => void) {
+    constructor(covid19Data: Covid19Data[], refreshCovid19Data: RefreshCovid19DataFunction) {
         this.covid19Data = covid19Data
         this.refreshCovid19DataFunction = refreshCovid19Data
     }

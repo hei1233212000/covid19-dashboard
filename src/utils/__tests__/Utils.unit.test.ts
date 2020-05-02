@@ -1,7 +1,7 @@
 import Utils from '../Utils'
 import { createDummyObject, DummyObject } from '../../test/model/DummyObject'
 
-describe('utils', () => {
+describe('Utils', () => {
     describe('#isEmpty and #isNotEmpty', () => {
         describe.each([
             /* return true */
@@ -76,6 +76,32 @@ describe('utils', () => {
         ])('input: "%s"', (anyNumber: number, expectedResult: string) => {
             it(`should return "${expectedResult}"`, () => {
                 expect(Utils.formatNumberWithCommas(anyNumber)).toEqual(expectedResult)
+            })
+        })
+    })
+
+    describe('#isNumber', () => {
+        describe.each([
+            ['a', false],
+            ['-1', true],
+            ['0', true],
+            ['1', true],
+            ['0.11', true],
+        ])('input: "%s"', (input: string, expectedResult: boolean) => {
+            it(`should return "${expectedResult}"`, () => {
+                expect(Utils.isNumber(input)).toEqual(expectedResult)
+            })
+        })
+    })
+
+    describe('#minuteToMilliseconds', () => {
+        describe.each([
+            [0, 0],
+            [1, 60000],
+            [60, 3600000],
+        ])('input: "%d"', (minutes: number, expectedMilliseconds: number) => {
+            it(`should return "${expectedMilliseconds}"`, () => {
+                expect(Utils.minuteToMilliseconds(minutes)).toEqual(expectedMilliseconds)
             })
         })
     })

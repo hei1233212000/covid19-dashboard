@@ -30,4 +30,12 @@ export default class Utils {
     static formatNumberWithCommas = (anyNumber: number): string => {
         return anyNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
     }
+
+    static isNumber = (stringInput: string): boolean => {
+        return /^-?[0-9]\d*(\.\d+)?$/.test(stringInput)
+    }
+
+    static minuteToMilliseconds = (minutes: number): number => {
+        return minutes * 60 * 1000
+    }
 }

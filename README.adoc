@@ -58,6 +58,3 @@ Please visit the dashboard http://covid-19.drunkard-pig.com[here]
 * The https://dashboards-dev.sprinklr.com/data/9043/global-covid19-who-gis.json[COVID-19 data] is from https://www.who.int/[WHO]
 * The https://restcountries.eu/rest/v2/all[country information] is from https://restcountries.eu/[REST Countries]
 * The UI is powered by https://reactjs.org/[React] and https://www.primefaces.org/primereact/[PrimeReact]
-
-== TODO
-* implement auto refresh
