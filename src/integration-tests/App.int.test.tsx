@@ -115,12 +115,12 @@ describe('App integration test', () => {
         expect(screen.getByText('Refresh')).toBeInTheDocument()
     })
 
-    it('should have a message to show the last updatd time', () => {
+    it('should have a message to show the last refresh time', () => {
         const offset = Utils.localOffset()
         const dateTimeFormat = 'DD-MMM-YYYY HH:mm:ss'
         const currentTimestampInUtc = Utils.currentUtcTimestampInMilliseconds()
         const lastUpdatedTime = Utils.timestampToStringWithOffset(currentTimestampInUtc, offset, dateTimeFormat)
-        const lastUpdatedTimeMessage = `Last updated time: ${lastUpdatedTime}`
+        const lastUpdatedTimeMessage = `Last refresh time: ${lastUpdatedTime}`
         expect(screen.getByText(lastUpdatedTimeMessage)).toBeInTheDocument()
     })
 })

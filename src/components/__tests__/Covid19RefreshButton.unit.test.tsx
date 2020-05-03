@@ -31,11 +31,11 @@ describe('Covid19RefreshButton', () => {
         expect(refreshButton).toBeInTheDocument()
     })
 
-    it('should have message to show the last updated time', () => {
+    it('should have message to show the last refresh time', () => {
         const offset = Utils.localOffset()
         const dateTimeFormat = 'DD-MMM-YYYY HH:mm:ss'
         const lastUpdatedTime = Utils.timestampToStringWithOffset(lastUpdatedTimeInMilliseconds, offset, dateTimeFormat)
-        const lastUpdatedTimeMessage = `Last updated time: ${lastUpdatedTime}`
+        const lastUpdatedTimeMessage = `Last refresh time: ${lastUpdatedTime}`
         expect(screen.getByText(lastUpdatedTimeMessage)).toBeInTheDocument()
     })
 

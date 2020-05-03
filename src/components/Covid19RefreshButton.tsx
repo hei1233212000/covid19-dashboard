@@ -10,6 +10,7 @@ interface Covid19RefreshButtonProps {
 
 const offset = Utils.localOffset()
 const dateTimeFormat = 'DD-MMM-YYYY HH:mm:ss'
+
 const Covid19RefreshButton = (props: Covid19RefreshButtonProps): JSX.Element => {
     const refreshCovid19Data = () => {
         const manualRefresh = true
@@ -18,7 +19,7 @@ const Covid19RefreshButton = (props: Covid19RefreshButtonProps): JSX.Element => 
 
     const lastUpdatedTime = Utils.timestampToStringWithOffset(props.lastUpdatedTimeInMilliseconds, offset, dateTimeFormat)
     return <div className="covid19-refresh-button">
-        <span>Last updated time: {lastUpdatedTime}</span>
+        <span>Last refresh time: {lastUpdatedTime}</span>
         <i className="pi pi-refresh refresh" role="button" onClick={refreshCovid19Data}>&nbsp;Refresh</i>
     </div>
 }
