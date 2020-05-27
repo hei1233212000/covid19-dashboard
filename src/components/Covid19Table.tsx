@@ -32,7 +32,7 @@ const Covid19Table = (props: Covid19TableProps): JSX.Element => {
         const country = props.countries.find(country => country.countryCode === countryCode)
         if (country) {
             const countryName = country.name
-            return countryName.includes(filter)
+            return countryName.toUpperCase().includes(filter.toUpperCase())
         } else {
             return false
         }
