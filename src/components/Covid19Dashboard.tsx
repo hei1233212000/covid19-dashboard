@@ -2,9 +2,9 @@ import React, { useContext } from 'react'
 import Covid19Table from './Covid19Table'
 import Covid19Counter, { Covid19CounterLevel } from './Covid19Counter'
 import Covid19Card from './Covid19Card'
-import Covid19Chart from './Covid19Chart'
 import { Covid19DashboardContext } from '../context/Covid19DashboardContext'
 import Covid19RefreshButton from './Covid19RefreshButton'
+import Covid19ChartContainer from './Covid19ChartContainer'
 
 const Covid19Dashboard = (): JSX.Element => {
     const covid19DashboardState = useContext(Covid19DashboardContext)
@@ -45,8 +45,9 @@ const Covid19Dashboard = (): JSX.Element => {
         </div>
         <div className="p-col-12 p-lg-6">
             <Covid19Card title="Trend (measured by month)">
-                <Covid19Chart
+                <Covid19ChartContainer
                     covid19Data={covid19DashboardState.covid19Data}
+                    countries={covid19DashboardState.countries}
                     earliestRecordTimestamp={covid19DashboardState.earliestRecordTimestamp}
                     latestRecordTimestamp={covid19DashboardState.latestRecordTimestamp}
                 />

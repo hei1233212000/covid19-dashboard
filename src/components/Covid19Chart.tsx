@@ -24,8 +24,10 @@ const generateChartData = (props: Covid19ChartProps) => {
         const data = covid19ChartInternalData.find((internalData: Covid19ChartInternalData) => {
             return internalData.monthName === monthName
         })!
-        confirmCases.push(data.confirmCases)
-        deathCases.push(data.deathCases)
+        if (data) {
+            confirmCases.push(data.confirmCases)
+            deathCases.push(data.deathCases)
+        }
     })
 
     // TODO: find a way to use the SCSS variables to set the color
