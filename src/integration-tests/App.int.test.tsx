@@ -103,8 +103,8 @@ describe('App integration test', () => {
         })
     })
 
-    it('should have "Trend" chart', () => {
-        expect(screen.getByText('Trend')).toBeInTheDocument()
+    it('should have "Trend (measured by month)" chart', () => {
+        expect(screen.getByText('Trend (measured by month)')).toBeInTheDocument()
     })
 
     it('should show the project version', () => {
