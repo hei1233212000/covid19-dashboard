@@ -34,7 +34,8 @@ const Covid19Table = (props: Covid19TableProps): JSX.Element => {
             const countryName = country.name
             return countryName.toUpperCase().includes(filter.toUpperCase())
         } else {
-            return false
+            // this is only for handling the country code "Other*"
+            return countryCode.toUpperCase().includes(filter.toUpperCase())
         }
     }
 
