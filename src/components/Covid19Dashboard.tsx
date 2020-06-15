@@ -43,7 +43,7 @@ const Covid19Dashboard = (): JSX.Element => {
                               covid19Data={covid19DashboardState.latestCovid19Data}/>
             </Covid19Card>
         </div>
-        <div className="p-col-12 p-lg-6">
+        <div className="p-col-12 p-lg-6" data-testid="trend-panel">
             <Covid19Card title="Trend (measured by month)">
                 <Covid19ChartContainer
                     covid19Data={covid19DashboardState.covid19Data}

@@ -10,7 +10,7 @@ interface Covid19ChartProps {
 }
 
 const Covid19Chart = (props: Covid19ChartProps): JSX.Element => {
-    return <div className="covid19-chart">
+    return <div className="covid19-chart" data-testid="covid19-chart">
         <Chart type="line" data={generateChartData(props)} options={chartOptions()}/>
     </div>
 }

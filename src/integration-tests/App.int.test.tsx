@@ -1,5 +1,5 @@
 import React from 'react'
-import { cleanup, getByText, render, screen, getByTestId } from '@testing-library/react'
+import { cleanup, getByTestId, getByText, render, screen } from '@testing-library/react'
 import { waitFor } from '@testing-library/dom'
 import App from '../App'
 import { act } from 'react-dom/test-utils'
@@ -103,8 +103,25 @@ describe('App integration test', () => {
         })
     })
 
-    it('should have "Trend (measured by month)" chart', () => {
-        expect(screen.getByText('Trend (measured by month)')).toBeInTheDocument()
+    describe('when we look at trend panel', () => {
+        let trendPanel: HTMLElement
+
+        beforeEach(() => {
+            trendPanel = screen.getByTestId('trend-panel')
+            expect(trendPanel).toBeInTheDocument()
+        })
+
+        it('should be named "Trend (measured by month)"', () => {
+            expect(getByText(trendPanel, 'Trend (measured by month)')).toBeInTheDocument()
+        })
+
+        it('should have a country selector', () => {
+            expect(getByText(trendPanel, 'All impacted countries')).toBeInTheDocument()
+        })
+
+        it('should have a chart', () => {
+            expect(getByTestId(trendPanel, 'covid19-chart')).toBeInTheDocument()
+        })
     })
 
     it('should show the project version', () => {

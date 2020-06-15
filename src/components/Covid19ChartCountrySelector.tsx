@@ -1,5 +1,5 @@
-import React from 'react'
-import { Dropdown } from 'primereact/dropdown'
+import React, { useState } from 'react'
+import { AutoComplete } from 'primereact/autocomplete';
 
 interface Covid19ChartCountrySelectorProps {
     selectedCountryItem: CountryDropdownItem,
@@ -13,10 +13,25 @@ export interface CountryDropdownItem {
 }
 
 const Covid19ChartCountrySelector = (props: Covid19ChartCountrySelectorProps): JSX.Element => {
+    const [suggestions, setSuggestions] = useState(props.countryItems)
+    const filterSuggestions = (e: { query: string }) => {
+        const filteredCountryItems = props.countryItems
+            .filter(country => country.countryName.toLowerCase().includes(e.query.toLowerCase()))
+        setSuggestions(filteredCountryItems)
+    }
+    const selectText = (e: any) => {
+        e.target.select()
+    }
+
     return <div className="covid19-chart-country-selector">
-        <Dropdown value={props.selectedCountryItem} options={props.countryItems}
-                  onChange={props.onSelectCountryItemChange}
-                  optionLabel="countryName"
+        <AutoComplete value={props.selectedCountryItem}
+                      field="countryName"
+                      suggestions={suggestions}
+                      completeMethod={filterSuggestions}
+                      placeholder="Country"
+                      dropdown={true}
+                      onChange={props.onSelectCountryItemChange}
+                      onClick={selectText}
         />
     </div>
 }
