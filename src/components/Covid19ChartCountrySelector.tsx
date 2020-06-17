@@ -24,15 +24,18 @@ const Covid19ChartCountrySelector = (props: Covid19ChartCountrySelectorProps): J
     }
 
     return <div className="covid19-chart-country-selector">
-        <AutoComplete value={props.selectedCountryItem}
-                      field="countryName"
-                      suggestions={suggestions}
-                      completeMethod={filterSuggestions}
-                      placeholder="Country"
-                      dropdown={true}
-                      onChange={props.onSelectCountryItemChange}
-                      onClick={selectText}
-        />
+        { /* This is a trick to disable the autocomplete feature in browser */ }
+        <form autoComplete="false">
+            <AutoComplete value={props.selectedCountryItem}
+                          field="countryName"
+                          suggestions={suggestions}
+                          completeMethod={filterSuggestions}
+                          placeholder="Countries, areas or territories"
+                          dropdown={true}
+                          onChange={props.onSelectCountryItemChange}
+                          onClick={selectText}
+            />
+        </form>
     </div>
 }
 
