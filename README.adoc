@@ -52,7 +52,7 @@ for more information.
 You have to build the production bundle first
 
 == Demo
-Please visit the dashboard http://covid-19.drunkard-pig.com[here]
+Please visit the dashboard https://covid-19.drunkard-pig.com[here]
 
 == Remarks:
 * The https://dashboards-dev.sprinklr.com/data/9043/global-covid19-who-gis.json[COVID-19 data] is from https://www.who.int/[WHO]
