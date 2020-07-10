@@ -1,6 +1,6 @@
 import React from 'react'
 import Covid19DashboardContainer from '../Covid19DashboardContainer'
-import { cleanup, render, screen } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import { Country } from '../../models/internal/country-internal-models'
 import { Covid19Data } from '../../models/internal/covid19-internal-models'
 import CountryApi from '../../api/CountryApi'
@@ -38,8 +38,6 @@ describe('Covid19DashboardContainer', () => {
             })
         })
 
-        afterEach(cleanup)
-
         if (shouldShowLoadingSpinner) {
             it('should show loading spinner', () => {
                 expect(screen.getByRole('alert')).toBeInTheDocument()
@@ -67,8 +65,6 @@ describe('Covid19DashboardContainer', () => {
                 rerenderComponent = rerender
             })
         })
-
-        afterEach(cleanup)
 
         it('should start the scheduler to auto refresh the COVID-19 data', () => {
             expect(setInterval).toHaveBeenCalledTimes(1)

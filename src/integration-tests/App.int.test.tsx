@@ -1,5 +1,5 @@
 import React from 'react'
-import { cleanup, getByTestId, getByText, render, screen } from '@testing-library/react'
+import { getByTestId, getByText, render, screen } from '@testing-library/react'
 import { waitFor } from '@testing-library/dom'
 import App from '../App'
 import { act } from 'react-dom/test-utils'
@@ -36,8 +36,6 @@ describe('App integration test', () => {
             () => expect(fetchMock).toHaveBeenCalledTimes(2)
         )
     })
-
-    afterEach(cleanup)
 
     it('should have Header', () => {
         expect(screen.getByText('COVID-19 outbreak situation')).toBeInTheDocument()

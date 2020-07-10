@@ -1,6 +1,6 @@
 import React from 'react'
 import { act } from 'react-dom/test-utils'
-import { cleanup, render, screen } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import Covid19RefreshButton from '../Covid19RefreshButton'
 import { RefreshCovid19DataFunction } from '../../context/Covid19DashboardContext'
 import Utils from '../../utils/Utils'
@@ -24,8 +24,6 @@ describe('Covid19RefreshButton', () => {
         })
         refreshButton = screen.getByText(refreshIconText)
     })
-
-    afterEach(cleanup)
 
     it(`should have text "${refreshIconText}"`, () => {
         expect(refreshButton).toBeInTheDocument()
