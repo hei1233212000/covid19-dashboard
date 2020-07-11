@@ -1,11 +1,10 @@
 import React from 'react'
 import Covid19DashboardContainer from '../Covid19DashboardContainer'
-import { render, screen } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import { Country } from '../../models/internal/country-internal-models'
 import { Covid19Data } from '../../models/internal/covid19-internal-models'
 import CountryApi from '../../api/CountryApi'
 import { Covid19Api } from '../../api/Covid19Api'
-import { act } from 'react-dom/test-utils'
 import 'jest-canvas-mock'
 import EnvVariables from '../../env/EnvVariables'
 
@@ -23,6 +22,10 @@ describe('Covid19DashboardContainer', () => {
         new Covid19Data('AMRO', 'US', 1582502400000, 0, 0, 0, 0)
     ]
 
+    beforeEach(() => {
+        jest.useFakeTimers()
+    })
+
     describe.each([
         [emptyCountries, emptyCovid19Data, true],
         [emptyCountries, nonEmptyCovid19Data, true],
@@ -33,9 +36,10 @@ describe('Covid19DashboardContainer', () => {
             CountryApi.findCountries = jest.fn().mockReturnValue(Promise.resolve(countries))
             Covid19Api.findCovid19Data = jest.fn().mockReturnValue(Promise.resolve(covid19Data))
 
-            await act(async () => {
-                render(<Covid19DashboardContainer/>)
-            })
+            render(<Covid19DashboardContainer/>)
+            await waitFor(
+                () => expect(setInterval).toHaveBeenCalledTimes(shouldShowLoadingSpinner ? 0 : 1)
+            )
         })
 
         if (shouldShowLoadingSpinner) {
@@ -54,20 +58,19 @@ describe('Covid19DashboardContainer', () => {
         let rerenderComponent: Function
 
         beforeEach(async () => {
-            jest.useFakeTimers()
             expectedRefreshCovid19DataIntervalInMilliseconds = EnvVariables.refreshCovid19DataIntervalInMilliseconds
 
             CountryApi.findCountries = jest.fn().mockReturnValue(Promise.resolve(nonEmptyCountries))
             Covid19Api.findCovid19Data = jest.fn().mockReturnValue(Promise.resolve(nonEmptyCovid19Data))
 
-            await act(async () => {
-                const {rerender} = render(<Covid19DashboardContainer/>)
-                rerenderComponent = rerender
-            })
+            const {rerender} = render(<Covid19DashboardContainer/>)
+            rerenderComponent = rerender
+            await waitFor(
+                () => expect(setInterval).toHaveBeenCalledTimes(1)
+            )
         })
 
         it('should start the scheduler to auto refresh the COVID-19 data', () => {
-            expect(setInterval).toHaveBeenCalledTimes(1)
             expect(setInterval).toHaveBeenLastCalledWith(expect.any(Function), expectedRefreshCovid19DataIntervalInMilliseconds)
         })
 
@@ -78,15 +81,21 @@ describe('Covid19DashboardContainer', () => {
         describe('when we rerender the component', () => {
             beforeEach(() => {
                 jest.clearAllMocks()
+                // make sure the call count is reset
+                expect(setInterval).toHaveBeenCalledTimes(0)
                 rerenderComponent(<Covid19DashboardContainer/>)
             })
 
-            it('should clean the scheduler', () => {
-                expect(clearInterval).toHaveBeenCalledTimes(1)
+            it('should clean the scheduler', async () => {
+                await waitFor(
+                    () => expect(clearInterval).toHaveBeenCalledTimes(1)
+                )
             })
 
-            it('should restart the scheduler', () => {
-                expect(setInterval).toHaveBeenCalledTimes(1)
+            it('should restart the scheduler', async () => {
+                await waitFor(
+                    () => expect(setInterval).toHaveBeenCalledTimes(1)
+                )
             })
         })
     })

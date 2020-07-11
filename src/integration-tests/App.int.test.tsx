@@ -2,7 +2,6 @@ import React from 'react'
 import { getByTestId, getByText, render, screen } from '@testing-library/react'
 import { waitFor } from '@testing-library/dom'
 import App from '../App'
-import { act } from 'react-dom/test-utils'
 import { Country as ExternalCountry } from '../models/external/country-external-models'
 import { Covid19Data as ExternalCovid19Data } from '../models/external/covid19-external-models'
 import { enableFetchMocks } from 'jest-fetch-mock'
@@ -27,10 +26,7 @@ describe('App integration test', () => {
         })
 
         Utils.currentUtcTimestampInMilliseconds = jest.fn().mockReturnValue(1579478400000)
-
-        await act(async () => {
-            render(<App/>)
-        })
+        render(<App/>)
 
         await waitFor(
             () => expect(fetchMock).toHaveBeenCalledTimes(2)

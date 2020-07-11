@@ -1,5 +1,4 @@
 import React from 'react'
-import { act } from 'react-dom/test-utils'
 import { render, screen } from '@testing-library/react'
 import Covid19RefreshButton from '../Covid19RefreshButton'
 import { RefreshCovid19DataFunction } from '../../context/Covid19DashboardContext'
@@ -16,13 +15,11 @@ describe('Covid19RefreshButton', () => {
         mockedRefreshCovid19DataFunction = jest.fn((manualRefresh?: boolean) => {
             capturedManualRefresh = manualRefresh
         })
-        await act(async () => {
-            render(<Covid19RefreshButton
-                refreshCovid19DataFunction={mockedRefreshCovid19DataFunction}
-                lastUpdatedTimeInMilliseconds={lastUpdatedTimeInMilliseconds}
-            />)
-        })
-        refreshButton = screen.getByText(refreshIconText)
+        render(<Covid19RefreshButton
+            refreshCovid19DataFunction={mockedRefreshCovid19DataFunction}
+            lastUpdatedTimeInMilliseconds={lastUpdatedTimeInMilliseconds}
+        />)
+        refreshButton = await screen.findByText(refreshIconText)
     })
 
     it(`should have text "${refreshIconText}"`, () => {
