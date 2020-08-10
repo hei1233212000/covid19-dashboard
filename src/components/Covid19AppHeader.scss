@@ -14,4 +14,9 @@
   @include clearfix();
   @include linear-gradient-left(#0388E5, #07BDF4);
   @include transition(left $transitionDuration);
+
+  @media (max-width: 360px) {
+    font-size: 1.1em;
+    line-height: 35px;
+  }
 }
