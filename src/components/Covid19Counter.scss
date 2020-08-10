@@ -1,17 +1,22 @@
 @import '../styles/variables';
 @import '../styles/mixins';
 
+$maxWidth:1120px;
+
 .covid19-counter {
   position: relative;
 
   .count {
     color: #fff;
-    position: absolute;
-    top: 10px;
-    right: 10px;
     font-size: 24px;
     padding: 7px 14px;
     @include border-radius($borderRadius);
+
+    @media (min-width: $maxWidth) {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
 
     &.normal {
       background-color: $normalColor;
@@ -29,6 +34,9 @@
   // override priemreact element
   .p-card-title {
     max-width: 270px;
-    min-height: 3em;
+
+    @media (min-width: $maxWidth) {
+      min-height: 3em;
+    }
   }
 }
