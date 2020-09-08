@@ -55,6 +55,7 @@ You have to build the production bundle first
 Please visit the dashboard https://covid-19.drunkard-pig.com[here]
 
 == Remarks:
-* The https://dashboards-dev.sprinklr.com/data/9043/global-covid19-who-gis.json[COVID-19 data] is from https://www.who.int/[WHO]
+* The https://covid19.who.int/page-data/table/page-data.json[COVID-19 data] is from https://www.who.int/[WHO]
+* As the WHO restricts its data by using CORS, I also use the https://cors-anywhere.herokuapp.com/[CORS Anywhere] to by pass CORS
 * The https://restcountries.eu/rest/v2/all[country information] is from https://restcountries.eu/[REST Countries]
 * The UI is powered by https://reactjs.org/[React] and https://www.primefaces.org/primereact/[PrimeReact]

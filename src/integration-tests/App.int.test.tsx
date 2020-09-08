@@ -289,81 +289,238 @@ const countries: ExternalCountry[] = [
 ]
 
 const covid19Data: ExternalCovid19Data = {
-    "dimensions": [
-        {
-            "name": "day",
-            "type": "TIMESTAMP",
-            "dataType": null
-        },
-        {
-            "name": "Country",
-            "type": "STRING",
-            "dataType": null
-        },
-        {
-            "name": "Region",
-            "type": "STRING",
-            "dataType": null
+    "result": {
+        "pageContext": {
+            "countryGroups": [
+                {
+                    "dimension": {
+                        "name": "Country",
+                        "type": "STRING",
+                        "dataType": "STRING"
+                    },
+                    "value": "US",
+                    "data": {
+                        "metrics": [
+                            {
+                                "name": "Deaths",
+                                "type": "NUMBER",
+                                "dataType": "NUMERIC",
+                                "aggregateFunction": "SUM"
+                            },
+                            {
+                                "name": "Cumulative Deaths",
+                                "type": "NUMBER",
+                                "dataType": "NUMERIC",
+                                "aggregateFunction": "SUM"
+                            },
+                            {
+                                "name": "Deaths Last 7 Days",
+                                "type": "NUMBER",
+                                "dataType": "NUMERIC",
+                                "aggregateFunction": "SUM"
+                            },
+                            {
+                                "name": "Deaths Last 7 Days Change",
+                                "type": "NUMBER",
+                                "dataType": "NUMERIC",
+                                "aggregateFunction": "SUM"
+                            },
+                            {
+                                "name": "Deaths Per Million",
+                                "type": "NUMBER",
+                                "dataType": "NUMERIC",
+                                "aggregateFunction": "SUM"
+                            },
+                            {
+                                "name": "Confirmed",
+                                "type": "NUMBER",
+                                "dataType": "NUMERIC",
+                                "aggregateFunction": "SUM"
+                            },
+                            {
+                                "name": "Cumulative Confirmed",
+                                "type": "NUMBER",
+                                "dataType": "NUMERIC",
+                                "aggregateFunction": "SUM"
+                            },
+                            {
+                                "name": "Cases Last 7 Days",
+                                "type": "NUMBER",
+                                "dataType": "NUMERIC",
+                                "aggregateFunction": "SUM"
+                            },
+                            {
+                                "name": "Cases Last 7 Days Change",
+                                "type": "NUMBER",
+                                "dataType": "NUMERIC",
+                                "aggregateFunction": "SUM"
+                            },
+                            {
+                                "name": "Cases Per Million",
+                                "type": "NUMBER",
+                                "dataType": "NUMERIC",
+                                "aggregateFunction": "SUM"
+                            }
+                        ],
+                        "dimensions": [
+                            {
+                                "name": "day",
+                                "type": "TIMESTAMP",
+                                "dataType": "STRING"
+                            },
+                            {
+                                "name": "Region",
+                                "type": "STRING",
+                                "dataType": "STRING"
+                            }
+                        ],
+                        "rows": [
+                            [
+                                1579478400000,
+                                "AMRO",
+                                0, // deaths
+                                0, // Cumulative Deaths
+                                0, // Deaths Last 7 Days
+                                0, // Deaths Last 7 Days Change
+                                0, // Deaths Per Million
+                                1, // Confirmed
+                                1, // Cumulative Confirmed
+                                0, // Cases Last 7 Days
+                                0, // Cases Last 7 Days Change
+                                0 // Cases Per Million
+                            ],
+                            [
+                                1579564800000,
+                                "AMRO",
+                                0, // deaths
+                                0, // Cumulative Deaths
+                                0, // Deaths Last 7 Days
+                                0, // Deaths Last 7 Days Change
+                                0, // Deaths Per Million
+                                0, // Confirmed
+                                1, // Cumulative Confirmed
+                                0, // Cases Last 7 Days
+                                0, // Cases Last 7 Days Change
+                                0 // Cases Per Million
+                            ]
+                        ]
+                    }
+                },
+                {
+                    "dimension": {
+                        "name": "Country",
+                        "type": "STRING",
+                        "dataType": "STRING"
+                    },
+                    "value": "JP",
+                    "data": {
+                        "metrics": [
+                            {
+                                "name": "Deaths",
+                                "type": "NUMBER",
+                                "dataType": "NUMERIC",
+                                "aggregateFunction": "SUM"
+                            },
+                            {
+                                "name": "Cumulative Deaths",
+                                "type": "NUMBER",
+                                "dataType": "NUMERIC",
+                                "aggregateFunction": "SUM"
+                            },
+                            {
+                                "name": "Deaths Last 7 Days",
+                                "type": "NUMBER",
+                                "dataType": "NUMERIC",
+                                "aggregateFunction": "SUM"
+                            },
+                            {
+                                "name": "Deaths Last 7 Days Change",
+                                "type": "NUMBER",
+                                "dataType": "NUMERIC",
+                                "aggregateFunction": "SUM"
+                            },
+                            {
+                                "name": "Deaths Per Million",
+                                "type": "NUMBER",
+                                "dataType": "NUMERIC",
+                                "aggregateFunction": "SUM"
+                            },
+                            {
+                                "name": "Confirmed",
+                                "type": "NUMBER",
+                                "dataType": "NUMERIC",
+                                "aggregateFunction": "SUM"
+                            },
+                            {
+                                "name": "Cumulative Confirmed",
+                                "type": "NUMBER",
+                                "dataType": "NUMERIC",
+                                "aggregateFunction": "SUM"
+                            },
+                            {
+                                "name": "Cases Last 7 Days",
+                                "type": "NUMBER",
+                                "dataType": "NUMERIC",
+                                "aggregateFunction": "SUM"
+                            },
+                            {
+                                "name": "Cases Last 7 Days Change",
+                                "type": "NUMBER",
+                                "dataType": "NUMERIC",
+                                "aggregateFunction": "SUM"
+                            },
+                            {
+                                "name": "Cases Per Million",
+                                "type": "NUMBER",
+                                "dataType": "NUMERIC",
+                                "aggregateFunction": "SUM"
+                            }
+                        ],
+                        "dimensions": [
+                            {
+                                "name": "day",
+                                "type": "TIMESTAMP",
+                                "dataType": "STRING"
+                            },
+                            {
+                                "name": "Region",
+                                "type": "STRING",
+                                "dataType": "STRING"
+                            }
+                        ],
+                        "rows": [
+                            [
+                                1578960000000,
+                                "WPRO",
+                                0, // deaths
+                                0, // Cumulative Deaths
+                                0, // Deaths Last 7 Days
+                                0, // Deaths Last 7 Days Change
+                                0, // Deaths Per Million
+                                1, // Confirmed
+                                1, // Cumulative Confirmed
+                                0, // Cases Last 7 Days
+                                0, // Cases Last 7 Days Change
+                                0 // Cases Per Million
+                            ],
+                            [
+                                1579046400000,
+                                "WPRO",
+                                1, // deaths
+                                1, // Cumulative Deaths
+                                0, // Deaths Last 7 Days
+                                0, // Deaths Last 7 Days Change
+                                0, // Deaths Per Million
+                                2, // Confirmed
+                                3, // Cumulative Confirmed
+                                0, // Cases Last 7 Days
+                                0, // Cases Last 7 Days Change
+                                0 // Cases Per Million
+                            ]
+                        ]
+                    }
+                }
+            ]
         }
-    ],
-    "metrics": [
-        {
-            "name": "Deaths",
-            "type": "NUMBER",
-            "dataType": null
-        },
-        {
-            "name": "Cumulative Deaths",
-            "type": "NUMBER",
-            "dataType": null
-        },
-        {
-            "name": "Confirmed",
-            "type": "NUMBER",
-            "dataType": null
-        },
-        {
-            "name": "Cumulative Confirmed",
-            "type": "NUMBER",
-            "dataType": null
-        }
-    ],
-    "rows": [
-        [
-            1579478400000,
-            "US",
-            "AMRO",
-            0,
-            0,
-            1,
-            1
-        ],
-        [
-            1579564800000,
-            "US",
-            "AMRO",
-            0,
-            0,
-            0,
-            1
-        ],
-        [
-            1578960000000,
-            "JP",
-            "WPRO",
-            0,
-            0,
-            1,
-            1
-        ],
-        [
-            1579046400000,
-            "JP",
-            "WPRO",
-            1,
-            1,
-            2,
-            3
-        ]
-    ]
+    }
 }
