@@ -24,8 +24,8 @@
     "start:prod": "serve -s build",
     "start:dev": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jest-environment-jsdom-sixteen",
-    "test:ci": "react-scripts test --env=jest-environment-jsdom-sixteen --watchAll=false --forceExit --ci",
+    "test": "react-scripts test --env=jest-environment-jsdom-sixteen --detectOpenHandles",
+    "test:ci": "react-scripts test --env=jest-environment-jsdom-sixteen --watchAll=false --forceExit --ci --detectOpenHandles",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
