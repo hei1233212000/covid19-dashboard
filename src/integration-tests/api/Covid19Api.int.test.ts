@@ -17,6 +17,6 @@ describe('Covid19Api integration test', () => {
                 expect(covid19Data.numberOfConfirms).toBeDefined()
                 expect(covid19Data.numberOfCumulativeConfirms).toBeDefined()
             })
-        })
+        }, 10000)
     })
 })
