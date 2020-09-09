@@ -1,5 +1,5 @@
 import React from 'react'
-import { getByTestId, getByText, render, screen } from '@testing-library/react'
+import { getByDisplayValue, getByTestId, getByText, render, screen } from '@testing-library/react'
 import { waitFor } from '@testing-library/dom'
 import App from '../App'
 import { Country as ExternalCountry } from '../models/external/country-external-models'
@@ -110,7 +110,7 @@ describe('App integration test', () => {
         })
 
         it('should have a country selector', () => {
-            expect(getByText(trendPanel, 'All impacted countries')).toBeInTheDocument()
+            expect(getByDisplayValue(trendPanel, 'All impacted countries')).toBeInTheDocument()
         })
 
         it('should have a chart', () => {
