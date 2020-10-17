@@ -52,10 +52,34 @@ for more information.
 You have to build the production bundle first
 
 == Demo
-Please visit the dashboard https://covid-19.drunkard-pig.com[here]
+Please visit the dashboard https://dashboard.covid-19.drunkard-pig.com[here]
 
 == Remarks:
 * The https://covid19.who.int/page-data/table/page-data.json[COVID-19 data] is from https://www.who.int/[WHO]
 * As the WHO restricts its data by using CORS, I also use the https://cors-anywhere.herokuapp.com/[CORS Anywhere] to by pass CORS
 * The https://restcountries.eu/rest/v2/all[country information] is from https://restcountries.eu/[REST Countries]
 * The UI is powered by https://reactjs.org/[React] and https://www.primefaces.org/primereact/[PrimeReact]
+
+== Deployment
+=== Prerequisites
+- AWS CLI 2+
+- Serverless 2+
+
+=== Pre deployment (create cert)
+As creat cert takes very long time, so, we should create the cert before everything
+Besides, we have to create the cert in `us-east-1`
+
+1. run `aws --region us-east-1 cloudformation create-stack --stack-name create-covid-19-dashboard-cert --template-body file://deployment/create-cert.yml --tags Key=project,Value=covid-19`
+2. Go to AWS cert manager page and validate the cert (add CNAME record in Route53)
+3. wait for the validation to be completed
+4. capture the ARN in the cloudformation stack output
+
+=== Deploy infrastructure
+we could run the serverless deployment to deploy the infrastructure
+
+- run `serverless deploy --stage prod --certArn {cert arn captured from above}`
+
+=== Deploy application
+Most of the time we only need to deploy the application once the infrastructure is created
+
+- run `serverless client deploy --no-confirm --no-config-change --no-policy-change -no-cors-change`
