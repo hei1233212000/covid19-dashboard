@@ -110,7 +110,6 @@ resources:
             Bucket: { "Fn::GetAtt": [ "Covid19DashboardLogBucket", "DomainName" ] }
             IncludeCookies: false
             Prefix: cloud-front-log/
-      DependsOn: Covid19DashboardLogBucket
     # add A record to link the custom domain to CloudFront
     Covid19DashboardRoute53RecordSet:
       Type: AWS::Route53::RecordSetGroup
