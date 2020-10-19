@@ -33,8 +33,9 @@ export class Covid19DashboardState {
         this.refreshCovid19DataFunction = refreshCovid19DataFunction
         this.lastUpdatedTimestamp = lastUpdatedTimestamp
 
-        this.earliestRecordTimestamp = this.findTimestamp(this.covid19Data, Math.min)
-        this.latestRecordTimestamp = this.findTimestamp(this.covid19Data, Math.max)
+        const earliestAndLatestRecordTimestamp = this.findEarliestAndLatestRecordTimestamp(this.covid19Data)
+        this.earliestRecordTimestamp = earliestAndLatestRecordTimestamp.earliestRecordTimestamp
+        this.latestRecordTimestamp = earliestAndLatestRecordTimestamp.latestRecordTimestamp
         this.latestCovid19Data = this.extractLatestCovid19Data(this.covid19Data)
         this.totalCumulativeConfirms = this.findTotalCumulativeConfirms(this.latestCovid19Data)
         this.totalCumulativeDeaths = this.findTotalCumulativeDeaths(this.latestCovid19Data)
@@ -43,7 +44,7 @@ export class Covid19DashboardState {
         this.ready = Utils.isNotEmpty(countries) && Utils.isNotEmpty(covid19Data)
     }
 
-    extractLatestCovid19Data = (covid19Data: Covid19Data[]): Covid19Data[] => {
+    private extractLatestCovid19Data = (covid19Data: Covid19Data[]): Covid19Data[] => {
         const grouped = Utils.groupBy(covid19Data, (data: Covid19Data) => data.countryCode)
         const result: Covid19Data[] = []
         grouped.forEach((history: Covid19Data[]) => {
@@ -55,26 +56,39 @@ export class Covid19DashboardState {
         return result
     }
 
-    findTotalCumulativeConfirms = (covid19Data: Covid19Data[]): number => {
+    private findTotalCumulativeConfirms = (covid19Data: Covid19Data[]): number => {
         return covid19Data.reduce((accumulatedNumberOfCumulativeConfirms: number, data: Covid19Data) => {
             return accumulatedNumberOfCumulativeConfirms + data.numberOfCumulativeConfirms
         }, 0)
     }
 
-    findNumberOfCountriesWithCases = (covid19Data: Covid19Data[]): number => {
+    private findNumberOfCountriesWithCases = (covid19Data: Covid19Data[]): number => {
         return covid19Data.length
     }
 
-    findTotalCumulativeDeaths = (covid19Data: Covid19Data[]): number => {
+    private findTotalCumulativeDeaths = (covid19Data: Covid19Data[]): number => {
         return covid19Data.reduce((accumulatedNumberOfCumulativeDeaths: number, data: Covid19Data) => {
             return accumulatedNumberOfCumulativeDeaths + data.numberOfCumulativeDeaths
         }, 0)
     }
 
-    findTimestamp = (covid19Data: Covid19Data[], extract: (...values: number[]) => number): number => {
+    private findEarliestAndLatestRecordTimestamp = (covid19Data: Covid19Data[]) => {
         const timestampInMilliseconds = covid19Data.map((data: Covid19Data) => {
             return data.timestampInMillisecond
         })
-        return extract(...timestampInMilliseconds)
+        let len = timestampInMilliseconds.length;
+        let max = -Infinity;
+        let min = Infinity;
+
+        while (len--) {
+            const timestampInMillisecond = timestampInMilliseconds[len];
+            max = timestampInMillisecond > max ? timestampInMillisecond : max;
+            min = timestampInMillisecond < min ? timestampInMillisecond : min;
+        }
+
+        return {
+            earliestRecordTimestamp: min,
+            latestRecordTimestamp: max
+        }
     }
 }
