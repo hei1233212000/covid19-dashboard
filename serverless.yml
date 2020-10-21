@@ -21,6 +21,10 @@ custom:
     bucketName: ${self:custom.siteName}
     distributionFolder: build
     indexDocument: index.html
+    objectHeaders:
+      '*.html':
+        - name: Cache-Control
+          value: no-cache
   remover:
     buckets:
       - ${self:custom.client.bucketName}
