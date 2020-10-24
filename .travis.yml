@@ -5,9 +5,9 @@ install:
   - yarn install --frozen-lockfile
 script:
   - yarn test:ci
+  - yarn build
 before_deploy:
   - npm install -g serverless
-  - yarn build
 deploy:
   provider: script
   script: sls client deploy --no-confirm --no-config-change --no-policy-change -no-cors-change
