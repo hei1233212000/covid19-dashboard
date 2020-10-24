@@ -38,7 +38,15 @@ describe('App integration test', () => {
     })
 
     it('should have Footer', () => {
-        expect(screen.getByText('Powered by React and PrimeReact')).toBeInTheDocument()
+        // below is referring to https://www.polvara.me/posts/five-things-you-didnt-know-about-testing-library/
+        screen.getByText((content: string, node: HTMLElement) => {
+            const hasText = (node: Element) => node.textContent === 'Powered by React and PrimeReact';
+            const nodeHasText = hasText(node);
+            const childrenDontHaveText = Array.from(node.children).every(
+                (child: Element) => !hasText(child)
+            );
+            return nodeHasText && childrenDontHaveText;
+        });
     })
 
     describe.each([
