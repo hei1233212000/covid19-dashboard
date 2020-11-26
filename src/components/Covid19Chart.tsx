@@ -15,7 +15,10 @@ const Covid19Chart = (props: Covid19ChartProps): JSX.Element => {
     </div>
 }
 
-const generateChartData = (props: Covid19ChartProps) => {
+/**
+ * export it just for testing
+ */
+export const generateChartData = (props: Covid19ChartProps) => {
     const monthNames = generateMonths(props.earliestRecordTimestamp, props.latestRecordTimestamp)
     const covid19ChartInternalData = generateCovid19ChartInternalData(props.covid19Data)
     const confirmCases: number[] = []
@@ -64,12 +67,12 @@ const generateCovid19ChartInternalData = (covid19Data: Covid19Data[]): Covid19Ch
     const covid19ChartInternalData: Covid19ChartInternalData[] = []
     covid19Data.forEach((data: Covid19Data) => {
         const month = toMonthString(toMonthNumber(data.timestampInMillisecond))
-        const monthIsInitialized = covid19ChartInternalData.find((internalData: Covid19ChartInternalData) => {
+        const currentMonthData = covid19ChartInternalData.find((internalData: Covid19ChartInternalData) => {
             return internalData.monthName === month
         })
-        if (monthIsInitialized) {
-            monthIsInitialized.confirmCases = monthIsInitialized.confirmCases + data.numberOfConfirms
-            monthIsInitialized.deathCases = monthIsInitialized.deathCases + data.numberOfDeaths
+        if (currentMonthData) {
+            currentMonthData.confirmCases = currentMonthData.confirmCases + data.numberOfConfirms
+            currentMonthData.deathCases = currentMonthData.deathCases + data.numberOfDeaths
         } else {
             covid19ChartInternalData.push(new Covid19ChartInternalData(
                 month,
