@@ -34,7 +34,11 @@ const useCountries = (): Country[] => {
     const [countries, setCountries] = useState(initialState)
     useEffect(() => {
         CountryApi.findCountries()
-            .then(data => setCountries(data))
+            .then(data => {
+                const dataClone = [...data]
+                dataClone.push(unknownCountry())
+                setCountries(dataClone)
+            })
     }, [])
     return countries
 }
@@ -68,6 +72,13 @@ const useAutoRefreshCovid19Data = (
             return () => clearInterval(intervalId)
         }
     }, [covid19DashboardState, refreshIntervalInMilliseconds])
+}
+
+/**
+ * This is a workaround about the data provider would have data with count code ' '
+ */
+const unknownCountry = (): Country => {
+    return new Country('', ' ', 'Others', '')
 }
 
 class Covid19DataAndCallback {

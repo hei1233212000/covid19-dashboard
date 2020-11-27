@@ -41,7 +41,8 @@ export class Covid19DashboardState {
         this.totalCumulativeDeaths = this.findTotalCumulativeDeaths(this.latestCovid19Data)
         this.numberOfCountriesWithCases = this.findNumberOfCountriesWithCases(this.latestCovid19Data)
 
-        this.ready = Utils.isNotEmpty(countries) && Utils.isNotEmpty(covid19Data)
+        // the countries should have one default item in it
+        this.ready = Utils.isNotEmpty(countries) && countries.length > 1 && Utils.isNotEmpty(covid19Data)
     }
 
     private extractLatestCovid19Data = (covid19Data: Covid19Data[]): Covid19Data[] => {

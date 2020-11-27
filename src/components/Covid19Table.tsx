@@ -17,10 +17,15 @@ const Covid19Table = (props: Covid19TableProps): JSX.Element => {
         const country = props.countries.find(country => country.countryCode === countryCode)
         if (country) {
             const countryName = country.name
-            const countryFlagUrl = country.flagUrl
+            let iconElement = <span/>
+            if (country.flagUrl) {
+                const countryFlagUrl = country.flagUrl
+                iconElement = <span className="country-icon"><img src={countryFlagUrl} alt={`country-icon-${countryCode}`}
+                                                                  className='covid19-table-country-flag'/></span>
+            }
+
             return <div className="covid19-table-column-country">
-                <span className="country-icon"><img src={countryFlagUrl} alt={`country-icon-${countryCode}`}
-                                                    className='covid19-table-country-flag'/></span>
+                {iconElement}
                 <span>{countryName}</span>
             </div>
         } else {
