@@ -32,7 +32,9 @@ describe('Covid19Chart', () => {
             /* 2020 Dec */
             new Covid19Data('AMRO', 'US', 1609113600000, 4, 10, 40, 100),
             new Covid19Data('AMRO', 'US', 1609200000000, 5, 15, 50, 150),
-            new Covid19Data('AMRO', 'US', 1609286400000, 6, 21, 60, 210)
+            new Covid19Data('AMRO', 'US', 1609286400000, 6, 21, 60, 210),
+            /* 2021 Jan */
+            new Covid19Data('AMRO', 'US', 1609459200000, 1, 22, 10, 220)
         ]
         const earliestRecordTimestamp = covid19Data[0].timestampInMillisecond
         const latestRecordTimestamp = covid19Data[covid19Data.length - 1].timestampInMillisecond
@@ -46,13 +48,13 @@ describe('Covid19Chart', () => {
         const chartData = generateChartData(props)
 
         // then
-        expect(chartData.labels).toEqual(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
+        expect(chartData.labels).toEqual(['Jan/2020', 'Feb/2020', 'Mar/2020', 'Apr/2020', 'May/2020', 'Jun/2020', 'Jul/2020', 'Aug/2020', 'Sep/2020', 'Oct/2020', 'Nov/2020', 'Dec/2020', 'Jan/2021'])
 
         const dataset = chartData.datasets
         const confirmCases = dataset[0].data
-        expect(confirmCases).toEqual([0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 50, 150])
+        expect(confirmCases).toEqual([0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 50, 150, 10])
 
         const deathCases = dataset[1].data
-        expect(deathCases).toEqual([0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 5, 15])
+        expect(deathCases).toEqual([0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 5, 15, 1])
     })
 })
