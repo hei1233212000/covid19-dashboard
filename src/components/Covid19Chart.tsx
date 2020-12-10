@@ -127,9 +127,26 @@ const chartOptions = () => {
         scales: {
             yAxes: [{
                 ticks: {
-                    maxTicksLimit: 20
+                    maxTicksLimit: 20,
+                    callback: (value: any) => {
+                        return Utils.formatNumberWithCommas(value)
+                    }
                 }
             }]
+        },
+        tooltips: {
+            callbacks: {
+                label: (tooltipItem: any, data: any) => {
+                    let label = data.datasets[tooltipItem.datasetIndex].label || ''
+                    if (label) {
+                        label += ': '
+                    }
+
+                    const caseAmount = Math.round(tooltipItem.yLabel * 100) / 100;
+                    label += Utils.formatNumberWithCommas(caseAmount);
+                    return label
+                }
+            }
         }
     }
 }
