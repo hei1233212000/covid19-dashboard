@@ -3,6 +3,12 @@ import { Covid19Data } from '../models/internal/covid19-internal-models'
 import { Chart } from 'primereact/chart'
 import Utils from '../utils/Utils'
 
+const confirmedCaseColor = '#f9c851';
+const deathCaseColor = '#ef6262';
+
+const confirmedCaseYAxisId = 'confirmed-case';
+const deathCaseYAxisId = 'death-case';
+
 interface Covid19ChartProps {
     covid19Data: Covid19Data[],
     earliestRecordTimestamp: number,
@@ -39,15 +45,19 @@ export const generateChartData = (props: Covid19ChartProps) => {
         datasets: [
             {
                 label: 'Confirmed cases',
+                yAxisID: confirmedCaseYAxisId,
                 data: confirmCases,
                 fill: false,
-                borderColor: '#f9c851',
+                borderColor: confirmedCaseColor,
+                backgroundColor: confirmedCaseColor
             },
             {
                 label: 'Death cases',
+                yAxisID: deathCaseYAxisId,
                 data: deathCases,
                 fill: false,
-                borderColor: '#ef6262'
+                borderColor: deathCaseColor,
+                backgroundColor: deathCaseColor
             }
         ]
     }
@@ -125,14 +135,16 @@ const toMonthString = (monthNumber: number): string => {
 const chartOptions = () => {
     return {
         scales: {
-            yAxes: [{
-                ticks: {
-                    maxTicksLimit: 20,
-                    callback: (value: any) => {
-                        return Utils.formatNumberWithCommas(value)
-                    }
-                }
-            }]
+            yAxes: [
+                {
+                    id: confirmedCaseYAxisId,
+                    ticks: chartTicksConfiguration(confirmedCaseColor)
+                },
+                {
+                    id: deathCaseYAxisId,
+                    position: 'right',
+                    ticks: chartTicksConfiguration(deathCaseColor)
+                }]
         },
         tooltips: {
             callbacks: {
@@ -149,6 +161,17 @@ const chartOptions = () => {
             }
         }
     }
+}
+
+const chartTicksConfiguration = (color: string) => {
+    return {
+        fontColor: color,
+        fontStyle: 'bold',
+        maxTicksLimit: 10,
+        callback: (value: any) => {
+            return Utils.formatNumberWithCommas(value)
+        }
+    };
 }
 
 export default Covid19Chart
