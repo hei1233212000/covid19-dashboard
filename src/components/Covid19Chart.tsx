@@ -138,10 +138,12 @@ const chartOptions = () => {
             yAxes: [
                 {
                     id: confirmedCaseYAxisId,
+                    fullWidth: true,
                     ticks: chartTicksConfiguration(confirmedCaseColor)
                 },
                 {
                     id: deathCaseYAxisId,
+                    fullWidth: true,
                     position: 'right',
                     ticks: chartTicksConfiguration(deathCaseColor)
                 }]
