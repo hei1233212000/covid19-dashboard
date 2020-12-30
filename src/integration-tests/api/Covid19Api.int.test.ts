@@ -16,6 +16,7 @@ describe('Covid19Api integration test', () => {
                 expect(covid19Data.numberOfCumulativeDeaths).toBeDefined()
                 expect(covid19Data.numberOfConfirms).toBeDefined()
                 expect(covid19Data.numberOfCumulativeConfirms).toBeDefined()
+                expect(covid19Data.deathRate).toBeDefined()
             })
         }, 30000)
     })
