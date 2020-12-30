@@ -1,6 +1,6 @@
 {
   "name": "covid19-dashboard",
-  "version": "1.16.0",
+  "version": "1.17.0",
   "private": true,
   "dependencies": {
     "@types/lodash": "^4.14.161",
