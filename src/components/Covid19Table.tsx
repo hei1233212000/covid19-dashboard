@@ -11,26 +11,38 @@ interface Covid19TableProps {
     covid19Data: Covid19Data[],
 }
 
+const columnTitleClassname = 'p-column-title'
+const countryColumnHeader = 'Countries, areas or territories'
+const cumulativeConfirmsColumnHeader = 'Cumulative confirms'
+const cumulativeDeathsColumnHeader = 'Cumulative deaths'
+const deathRateColumnHeader = 'Death rate'
+
 const Covid19Table = (props: Covid19TableProps): JSX.Element => {
     const countryBodyTemplate = (covid19Data: Covid19Data): JSX.Element => {
         const countryCode = covid19Data.countryCode
         const country = props.countries.find(country => country.countryCode === countryCode)
+        let body: JSX.Element
         if (country) {
             const countryName = country.name
             let iconElement = <span/>
             if (country.flagUrl) {
                 const countryFlagUrl = country.flagUrl
-                iconElement = <span className="country-icon"><img src={countryFlagUrl} alt={`country-icon-${countryCode}`}
-                                                                  className='covid19-table-country-flag'/></span>
+                iconElement =
+                    <span className="country-icon"><img src={countryFlagUrl} alt={`country-icon-${countryCode}`}
+                                                        className='covid19-table-country-flag'/></span>
             }
 
-            return <div className="covid19-table-column-country">
+            body = <div className="covid19-table-column-country">
                 {iconElement}
                 <span>{countryName}</span>
             </div>
         } else {
-            return <div>{countryCode}</div>
+            body = <div>{countryCode}</div>
         }
+        return <div>
+            <div className={columnTitleClassname}>{countryColumnHeader}</div>
+            {body}
+        </div>
     }
 
     const filterCountry = (countryCode: string, filter: string): boolean => {
@@ -46,7 +58,7 @@ const Covid19Table = (props: Covid19TableProps): JSX.Element => {
 
     const multiSortMeta = [
         {field: 'numberOfCumulativeDeaths', order: -1},
-        {field: 'numberOfCumulativeConfirms', order: -1}
+        {field: 'numberOfCumulativeConfirms', order: -1},
     ]
 
     return <div className="covid19-table" data-testid="covid19-table">
@@ -57,27 +69,48 @@ const Covid19Table = (props: Covid19TableProps): JSX.Element => {
                    paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport"
                    currentPageReportTemplate="{first} to {last} of {totalRecords} entries"
         >
-            <Column field="countryCode" header="Countries, areas or territories" body={countryBodyTemplate}
+            <Column field="countryCode" header={countryColumnHeader} body={countryBodyTemplate}
                     filter filterMatchMode="custom" filterFunction={filterCountry} filterPlaceholder="Country"
             />
-            <Column field="numberOfCumulativeConfirms" header="Cumulative Confirms" sortable
-                    body={numberOfCumulativeConfirmsBodyTemplate} style={{width: '25%'}}
+            <Column field="numberOfCumulativeConfirms" header={cumulativeConfirmsColumnHeader} sortable
+                    body={numberOfCumulativeConfirmsBodyTemplate} style={{width: '20%'}}
                     filter filterMatchMode="gte" filterPlaceholder="Min."
             />
-            <Column field="numberOfCumulativeDeaths" header="Cumulative Deaths" sortable
-                    body={numberOfCumulativeDeathsBodyTemplate} style={{width: '25%'}}
+            <Column field="numberOfCumulativeDeaths" header={cumulativeDeathsColumnHeader} sortable
+                    body={numberOfCumulativeDeathsBodyTemplate} style={{width: '20%'}}
                     filter filterMatchMode="gte" filterPlaceholder="Min."
+            />
+            <Column field="deathRate" header={deathRateColumnHeader} sortable
+                    body={deathRateBodyTemplate} style={{width: '20%'}}
+                    filter filterMatchMode="custom" filterFunction={deathRateFilterFunction} filterPlaceholder="Min."
             />
         </DataTable>
     </div>
 }
 
 const numberOfCumulativeConfirmsBodyTemplate = (covid19Data: Covid19Data): JSX.Element => {
-    return <div>{Utils.formatNumberWithCommas(covid19Data.numberOfCumulativeConfirms)}</div>
+    return <div>
+        <div className={columnTitleClassname}>{cumulativeConfirmsColumnHeader}</div>
+        <div>{Utils.formatNumberWithCommas(covid19Data.numberOfCumulativeConfirms)}</div>
+    </div>
 }
 
 const numberOfCumulativeDeathsBodyTemplate = (covid19Data: Covid19Data): JSX.Element => {
-    return <div>{Utils.formatNumberWithCommas(covid19Data.numberOfCumulativeDeaths)}</div>
+    return <div>
+        <div className={columnTitleClassname}>{cumulativeDeathsColumnHeader}</div>
+        <div>{Utils.formatNumberWithCommas(covid19Data.numberOfCumulativeDeaths)}</div>
+    </div>
+}
+
+const deathRateBodyTemplate = (covid19Data: Covid19Data): JSX.Element => {
+    return <div>
+        <div className={columnTitleClassname}>{deathRateColumnHeader}</div>
+        <div>{Utils.formatPercentage(covid19Data.deathRate)}</div>
+    </div>
+}
+
+const deathRateFilterFunction = (deathRateInDecimal: number, filter: string): boolean => {
+    return deathRateInDecimal * 100 >= Number.parseFloat(filter)
 }
 
 export default Covid19Table

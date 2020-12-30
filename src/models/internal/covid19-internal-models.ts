@@ -6,6 +6,7 @@ export class Covid19Data {
     readonly numberOfCumulativeDeaths: number
     readonly numberOfConfirms: number
     readonly numberOfCumulativeConfirms: number
+    readonly deathRate: number
 
     constructor(region: string, countryCode: string, timestampInMillisecond: number, numberOfDeaths: number, numberOfCumulativeDeaths: number, numberOfConfirms: number, numberOfCumulativeConfirms: number) {
         this.region = region
@@ -15,5 +16,9 @@ export class Covid19Data {
         this.numberOfCumulativeDeaths = numberOfCumulativeDeaths
         this.numberOfConfirms = numberOfConfirms
         this.numberOfCumulativeConfirms = numberOfCumulativeConfirms
+        this.deathRate = 0
+        if (this.numberOfCumulativeConfirms) {
+            this.deathRate = this.numberOfCumulativeDeaths / this.numberOfCumulativeConfirms
+        }
     }
 }

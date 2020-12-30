@@ -1,5 +1,5 @@
 import React from 'react'
-import { getByDisplayValue, getByTestId, getByText, render, screen } from '@testing-library/react'
+import { getAllByText, getByDisplayValue, getByTestId, getByText, render, screen } from '@testing-library/react'
 import { waitFor } from '@testing-library/dom'
 import App from '../App'
 import { Country as ExternalCountry } from '../models/external/country-external-models'
@@ -98,10 +98,11 @@ describe('App integration test', () => {
 
             it.each([
                 ['Countries, areas or territories'],
-                ['Cumulative Confirms'],
-                ['Cumulative Deaths'],
+                ['Cumulative confirms'],
+                ['Cumulative deaths'],
+                ['Death rate'],
             ])('should have "%s" column', (columnLabel: string) => {
-                expect(getByText(covid19Table, columnLabel)).toBeInTheDocument()
+                expect(getAllByText(covid19Table, columnLabel).length).toBeGreaterThan(0)
             })
         })
     })
