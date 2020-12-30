@@ -16,4 +16,4 @@ deploy:
     tags: true
 notifications:
   email:
-    on_failure: always
+    enabled: true
