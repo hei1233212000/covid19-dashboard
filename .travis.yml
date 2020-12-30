@@ -14,3 +14,6 @@ deploy:
   edge: true # opt in to dpl v2
   on:
     tags: true
+notifications:
+  email:
+    on_failure: always
