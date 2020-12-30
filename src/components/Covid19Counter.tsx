@@ -15,14 +15,21 @@ interface Covid19CounterProps {
     level: Covid19CounterLevel,
     earliestRecordTimestamp: number,
     latestRecordTimestamp: number,
+    isPercentage?: boolean,
 }
 
 const Covid19Counter = (props: Covid19CounterProps): JSX.Element => {
     const countColorCssClass = generateCountColorCssClass(props.level)
     const counterRemarks = generateCounterRemarks(props.earliestRecordTimestamp, props.latestRecordTimestamp)
+    let counterValue: string;
+    if (props.isPercentage) {
+        counterValue = Utils.formatPercentage(props.count);
+    } else {
+        counterValue = Utils.formatNumberWithCommas(props.count);
+    }
     return <div className="covid19-counter">
         <Covid19Card title={props.title} subTitle={counterRemarks}>
-            <div className={`count ${countColorCssClass}`}>{Utils.formatNumberWithCommas(props.count)}</div>
+            <div className={`count ${countColorCssClass}`}>{counterValue}</div>
         </Covid19Card>
     </div>
 }

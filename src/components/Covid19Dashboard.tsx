@@ -16,21 +16,29 @@ const Covid19Dashboard = (): JSX.Element => {
                 lastUpdatedTimeInMilliseconds={covid19DashboardState.lastUpdatedTimestamp}
             />
         </div>
-        <div className="p-col-12 p-md-4" data-testid="confirmed-cases-counter">
+        <div className="p-col-12 p-md-3" data-testid="confirmed-cases-counter">
             <Covid19Counter title="Confirmed cases" level={Covid19CounterLevel.Warning}
                             earliestRecordTimestamp={covid19DashboardState.earliestRecordTimestamp}
                             latestRecordTimestamp={covid19DashboardState.latestRecordTimestamp}
                             count={covid19DashboardState.totalCumulativeConfirms}
             />
         </div>
-        <div className="p-col-12 p-md-4" data-testid="confirmed-deaths-counter">
+        <div className="p-col-12 p-md-3" data-testid="confirmed-deaths-counter">
             <Covid19Counter title="Confirmed deaths" level={Covid19CounterLevel.Danger}
                             earliestRecordTimestamp={covid19DashboardState.earliestRecordTimestamp}
                             latestRecordTimestamp={covid19DashboardState.latestRecordTimestamp}
                             count={covid19DashboardState.totalCumulativeDeaths}
             />
         </div>
-        <div className="p-col-12 p-md-4" data-testid="countries-areas-territories-counter">
+        <div className="p-col-12 p-md-3" data-testid="death-rate-counter">
+            <Covid19Counter title="Death rate" level={Covid19CounterLevel.Danger}
+                            earliestRecordTimestamp={covid19DashboardState.earliestRecordTimestamp}
+                            latestRecordTimestamp={covid19DashboardState.latestRecordTimestamp}
+                            count={covid19DashboardState.deathRate}
+                            isPercentage={true}
+            />
+        </div>
+        <div className="p-col-12 p-md-3" data-testid="countries-areas-territories-counter">
             <Covid19Counter title="Countries, areas or territories with cases" level={Covid19CounterLevel.Normal}
                             earliestRecordTimestamp={covid19DashboardState.earliestRecordTimestamp}
                             latestRecordTimestamp={covid19DashboardState.latestRecordTimestamp}

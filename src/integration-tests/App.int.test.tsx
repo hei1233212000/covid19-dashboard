@@ -52,6 +52,7 @@ describe('App integration test', () => {
     describe.each([
         ['confirmed-cases-counter', 'Confirmed cases', '4'],
         ['confirmed-deaths-counter', 'Confirmed deaths', '1'],
+        ['death-rate-counter', 'Death rate', '25.00%'],
         ['countries-areas-territories-counter', 'Countries, areas or territories with cases', '2'],
     ])('when we look at the counter with id "%s"', (
         counterId: string,

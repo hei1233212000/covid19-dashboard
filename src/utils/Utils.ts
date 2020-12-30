@@ -1,4 +1,4 @@
-import { groupBy as lodashGroupBy, isEmpty as lodashIsEmpty } from 'lodash'
+import { groupBy as lodashGroupBy, isEmpty as lodashIsEmpty, round as loadashRound } from 'lodash'
 import moment from 'moment'
 
 export default class Utils {
@@ -41,5 +41,12 @@ export default class Utils {
 
     static currentUtcTimestampInMilliseconds = (): number => {
         return moment.utc().valueOf()
+    }
+
+    static formatPercentage = (anyNumber: number): string => {
+        const roundingPrecision = 2
+        // it is a trick to deal with the floating point calculation
+        const roundedPercentage = loadashRound(anyNumber * 100.0, roundingPrecision + 1)
+        return roundedPercentage.toFixed(roundingPrecision) + '%'
     }
 }

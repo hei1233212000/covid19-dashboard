@@ -66,7 +66,7 @@ describe('Utils', () => {
         })
     })
 
-    describe('#formatNumber', () => {
+    describe('#formatNumberWithCommams', () => {
         describe.each([
             [0, '0'],
             [10, '10'],
@@ -102,6 +102,23 @@ describe('Utils', () => {
         ])('input: "%d"', (minutes: number, expectedMilliseconds: number) => {
             it(`should return "${expectedMilliseconds}"`, () => {
                 expect(Utils.minuteToMilliseconds(minutes)).toEqual(expectedMilliseconds)
+            })
+        })
+    })
+
+    describe('#formatPercentage', () => {
+        describe.each([
+            [0, '0.00%'],
+            [0.1, '10.00%'],
+            [1, '100.00%'],
+            [0.01, '1.00%'],
+            [0.012, '1.20%'],
+            [0.0123, '1.23%'],
+            [0.01234, '1.23%'],
+            [0.01235, '1.24%'],
+        ])('input: "%s"', (anyNumber: number, expectedResult: string) => {
+            it(`should return "${expectedResult}"`, () => {
+                expect(Utils.formatPercentage(anyNumber)).toEqual(expectedResult)
             })
         })
     })

@@ -21,6 +21,7 @@ export class Covid19DashboardState {
     readonly ready: boolean
     readonly refreshCovid19DataFunction: RefreshCovid19DataFunction
     readonly lastUpdatedTimestamp: number
+    readonly deathRate: number
 
     constructor(
         countries: Country[],
@@ -40,6 +41,10 @@ export class Covid19DashboardState {
         this.totalCumulativeConfirms = this.findTotalCumulativeConfirms(this.latestCovid19Data)
         this.totalCumulativeDeaths = this.findTotalCumulativeDeaths(this.latestCovid19Data)
         this.numberOfCountriesWithCases = this.findNumberOfCountriesWithCases(this.latestCovid19Data)
+        this.deathRate = 0
+        if (this.totalCumulativeConfirms) {
+            this.deathRate = this.totalCumulativeDeaths / this.totalCumulativeConfirms
+        }
 
         // the countries should have one default item in it
         this.ready = Utils.isNotEmpty(countries) && countries.length > 1 && Utils.isNotEmpty(covid19Data)
