@@ -10,7 +10,7 @@ export class Covid19Api {
     static readonly numberOfCumulativeConfirmsIndex = 8;
 
     static findCovid19Data = async (): Promise<Covid19Data[]> => {
-        const response = await fetch('https://cors-anywhere.herokuapp.com/https://covid19.who.int/page-data/table/page-data.json')
+        const response = await fetch('https://data.covid-19.drunkard-pig.com/covid19-data.gzip')
         const externalCovid19Data = await response.json() as ExternalCovid19Data
         return externalCovid19Data.result.pageContext.countryGroups
             .flatMap(countryGroup => {

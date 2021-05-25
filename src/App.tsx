@@ -8,7 +8,7 @@ import Covid19DashboardContainer from './components/Covid19DashboardContainer'
 import Covid19AppFooter from './components/Covid19AppFooter'
 import Covid19AppHeader from './components/Covid19AppHeader'
 
-export default (): JSX.Element => {
+const mainFunction = (): JSX.Element => {
     return <div className="layout-wrapper">
         <div className="layout-header">
             <Covid19AppHeader/>
@@ -20,4 +20,5 @@ export default (): JSX.Element => {
             <Covid19AppFooter/>
         </div>
     </div>
-}
+};
+export default mainFunction

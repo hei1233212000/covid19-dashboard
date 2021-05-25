@@ -18,7 +18,7 @@ export default class Utils {
         return new Date().getTimezoneOffset() * -1
     }
 
-    static groupBy<E, K>(listOfObjects: E[], groupByFunction: (e: E) => string): Map<string, E[]> {
+    static groupBy<E>(listOfObjects: E[], groupByFunction: (e: E) => string): Map<string, E[]> {
         const grouped = lodashGroupBy<E>(listOfObjects, groupByFunction)
         const result = new Map<string, E[]>()
         for (let key of Object.keys(grouped)) {

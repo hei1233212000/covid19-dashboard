@@ -5,6 +5,7 @@ import { DataTable } from 'primereact/datatable'
 import { Column } from 'primereact/column'
 import './Covid19Table.scss'
 import Utils from '../utils/Utils'
+import { DataTableSortMeta } from 'primereact/components/datatable/DataTable';
 
 interface Covid19TableProps {
     countries: Country[],
@@ -57,8 +58,8 @@ const Covid19Table = (props: Covid19TableProps): JSX.Element => {
     }
 
     const multiSortMeta = [
-        {field: 'numberOfCumulativeDeaths', order: -1},
-        {field: 'numberOfCumulativeConfirms', order: -1},
+        {field: 'numberOfCumulativeDeaths', order: -1} as DataTableSortMeta,
+        {field: 'numberOfCumulativeConfirms', order: -1} as DataTableSortMeta,
     ]
 
     return <div className="covid19-table" data-testid="covid19-table">

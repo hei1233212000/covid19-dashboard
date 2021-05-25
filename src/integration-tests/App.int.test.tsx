@@ -39,7 +39,10 @@ describe('App integration test', () => {
 
     it('should have Footer', () => {
         // below is referring to https://www.polvara.me/posts/five-things-you-didnt-know-about-testing-library/
-        screen.getByText((content: string, node: HTMLElement) => {
+        screen.getByText((content: string, node: Element | null) => {
+            if (node == null) {
+                throw new Error('null element is detected')
+            }
             const hasText = (node: Element) => node.textContent === 'Powered by React and PrimeReact';
             const nodeHasText = hasText(node);
             const childrenDontHaveText = Array.from(node.children).every(

@@ -9,7 +9,7 @@ import Covid19ChartContainer from './Covid19ChartContainer'
 const Covid19Dashboard = (): JSX.Element => {
     const covid19DashboardState = useContext(Covid19DashboardContext)
 
-    return <div className="p-grid p-fluid">
+    return <div className="p-grid p-fluid" data-testid="covid19-dashboard">
         <div className="p-col-12">
             <Covid19RefreshButton
                 refreshCovid19DataFunction={covid19DashboardState.refreshCovid19DataFunction}
