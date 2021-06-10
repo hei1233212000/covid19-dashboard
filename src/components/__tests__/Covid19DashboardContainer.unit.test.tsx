@@ -7,6 +7,7 @@ import CountryApi from '../../api/CountryApi'
 import { Covid19Api } from '../../api/Covid19Api'
 import 'jest-canvas-mock'
 import EnvVariables from '../../env/EnvVariables'
+import { waitFor } from '@testing-library/dom';
 
 jest.mock('../../api/CountryApi')
 jest.mock('../../api/Covid19Api')
@@ -45,6 +46,10 @@ describe('Covid19DashboardContainer', () => {
             Covid19Api.findCovid19Data = jest.fn().mockReturnValue(Promise.resolve(covid19Data))
 
             render(<Covid19DashboardContainer/>)
+            await waitFor(() => {
+                expect(CountryApi.findCountries).toHaveBeenCalledTimes(1)
+                expect(Covid19Api.findCovid19Data).toHaveBeenCalledTimes(1)
+            })
         })
 
         it('should show loading spinner', () => {
