@@ -12,7 +12,7 @@ describe('CountryApi integration test', () => {
                 expect(country.region).toBeDefined()
                 expect(country.countryCode).toBeDefined()
                 expect(country.name).toBeDefined()
-                expect(country.flagUrl).toBeDefined()
+                // expect(country.flagUrl).toBeDefined()
             })
         })
     })

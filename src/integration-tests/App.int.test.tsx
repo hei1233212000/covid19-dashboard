@@ -16,7 +16,7 @@ describe('App integration test', () => {
         fetchMock.resetMocks()
 
         fetchMock.mockIf(/.*/, (request: Request) => {
-            if (request.url.includes('countries')) {
+            if (request.url.includes('countrylayer')) {
                 return Promise.resolve(JSON.stringify(countries))
             } else if (request.url.includes('covid')) {
                 return Promise.resolve(JSON.stringify(covid19Data))
