@@ -1,3 +1,11 @@
+export class Covid19FullData {
+    readonly covid19Data: Covid19Data[]
+
+    constructor(covid19Data: Covid19Data[]) {
+        this.covid19Data = covid19Data
+    }
+}
+
 export class Covid19Data {
     readonly region: string
     readonly countryCode: string

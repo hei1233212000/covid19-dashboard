@@ -67,13 +67,14 @@ describe('Covid19Api', () => {
         })
 
         it('should return COVID-19 data list', async () => {
-            const covid19DataList = await Covid19Api.findCovid19Data()
+            const covid19FullData = await Covid19Api.findCovid19Data()
+            const covid19Data = covid19FullData.covid19Data
             const expectedTotalNumberOfRecords = externalCovid19DataList.result.pageContext.countryGroups
                 .map(group => group.data.rows.length)
                 .reduce((a, b) => a + b);
-            expect(covid19DataList).toHaveLength(expectedTotalNumberOfRecords)
+            expect(covid19Data).toHaveLength(expectedTotalNumberOfRecords)
 
-            covid19DataList.forEach((covid19Data: Covid19Data, index: number) => {
+            covid19Data.forEach((covid19Data: Covid19Data, index: number) => {
                 const externalCovid19DataCountryGroup = externalCovid19DataList.result.pageContext.countryGroups[index]
                 const externalCovid19Data = externalCovid19DataCountryGroup.data.rows[0]
                 expect(covid19Data.region).toEqual(externalCovid19Data[1])

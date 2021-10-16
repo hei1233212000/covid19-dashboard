@@ -1,11 +1,11 @@
 import { Country } from '../models/internal/country-internal-models'
-import { Covid19Data } from '../models/internal/covid19-internal-models'
+import { Covid19Data, Covid19FullData } from '../models/internal/covid19-internal-models'
 import Utils from '../utils/Utils'
 import { createContext } from 'react'
 
 export const Covid19DashboardContext = createContext({} as Covid19DashboardState)
 
-export interface RefreshCovid19DataFunction {
+export interface RefreshCovid19FullDataFunction {
     (manualRefresh?: boolean): void
 }
 
@@ -19,19 +19,19 @@ export class Covid19DashboardState {
     readonly totalCumulativeDeaths: number
     readonly numberOfCountriesWithCases: number
     readonly ready: boolean
-    readonly refreshCovid19DataFunction: RefreshCovid19DataFunction
+    readonly refreshCovid19FullDataFunction: RefreshCovid19FullDataFunction
     readonly lastUpdatedTimestamp: number
     readonly deathRate: number
 
     constructor(
         countries: Country[],
-        covid19Data: Covid19Data[],
-        refreshCovid19DataFunction: RefreshCovid19DataFunction,
+        covid19FullData: Covid19FullData,
+        refreshCovid19FullDataFunction: RefreshCovid19FullDataFunction,
         lastUpdatedTimestamp: number
     ) {
         this.countries = countries
-        this.covid19Data = covid19Data
-        this.refreshCovid19DataFunction = refreshCovid19DataFunction
+        this.covid19Data = covid19FullData.covid19Data
+        this.refreshCovid19FullDataFunction = refreshCovid19FullDataFunction
         this.lastUpdatedTimestamp = lastUpdatedTimestamp
 
         const earliestAndLatestRecordTimestamp = this.findEarliestAndLatestRecordTimestamp(this.covid19Data)
@@ -47,7 +47,9 @@ export class Covid19DashboardState {
         }
 
         // the countries should have one default item in it
-        this.ready = Utils.isNotEmpty(countries) && countries.length > 1 && Utils.isNotEmpty(covid19Data)
+        this.ready = Utils.isNotEmpty(this.countries)
+            && countries.length > 1
+            && Utils.isNotEmpty(this.covid19Data)
     }
 
     private extractLatestCovid19Data = (covid19Data: Covid19Data[]): Covid19Data[] => {
@@ -79,9 +81,11 @@ export class Covid19DashboardState {
     }
 
     private findEarliestAndLatestRecordTimestamp = (covid19Data: Covid19Data[]) => {
-        const timestampInMilliseconds = covid19Data.map((data: Covid19Data) => {
-            return data.timestampInMillisecond
-        })
+        const timestampInMilliseconds = covid19Data
+            ? covid19Data.map((data: Covid19Data) => {
+                return data.timestampInMillisecond
+            })
+            : []
         let len = timestampInMilliseconds.length;
         let max = -Infinity;
         let min = Infinity;

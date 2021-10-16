@@ -2,7 +2,7 @@ import React from 'react'
 import Covid19DashboardContainer from '../Covid19DashboardContainer'
 import { render, screen } from '@testing-library/react'
 import { Country } from '../../models/internal/country-internal-models'
-import { Covid19Data } from '../../models/internal/covid19-internal-models'
+import { Covid19Data, Covid19FullData } from '../../models/internal/covid19-internal-models'
 import CountryApi from '../../api/CountryApi'
 import { Covid19Api } from '../../api/Covid19Api'
 import 'jest-canvas-mock'
@@ -43,7 +43,7 @@ describe('Covid19DashboardContainer', () => {
     ])('when countries is %o and covid19Data is %o', (countries: Country[], covid19Data: Covid19Data[]) => {
         beforeEach(async () => {
             CountryApi.findCountries = jest.fn().mockReturnValue(Promise.resolve(countries))
-            Covid19Api.findCovid19Data = jest.fn().mockReturnValue(Promise.resolve(covid19Data))
+            Covid19Api.findCovid19Data = jest.fn().mockReturnValue(Promise.resolve(new Covid19FullData(covid19Data)))
 
             render(<Covid19DashboardContainer/>)
             await waitFor(() => {
@@ -59,15 +59,22 @@ describe('Covid19DashboardContainer', () => {
 
     describe('when the component is already rendered', () => {
         let rerenderComponent: Function
+        let unmountFunction: Function
 
         beforeEach(async () => {
             CountryApi.findCountries = jest.fn().mockReturnValue(Promise.resolve(nonEmptyCountries))
-            Covid19Api.findCovid19Data = jest.fn().mockReturnValue(Promise.resolve(nonEmptyCovid19Data))
+            Covid19Api.findCovid19Data = jest.fn().mockReturnValue(Promise.resolve(new Covid19FullData(nonEmptyCovid19Data)))
 
-            const {rerender} = render(<Covid19DashboardContainer/>)
+            const {rerender, unmount} = render(<Covid19DashboardContainer/>)
             rerenderComponent = rerender
+            unmountFunction = unmount
             await waitUntilDashboardIsReady()
             jest.advanceTimersByTime(expectedRefreshCovid19DataIntervalInMilliseconds)
+        })
+
+        afterEach(() => {
+            // we unmount the component to prevent "Warning: An update to Covid19DashboardContainer inside a test was not wrapped in act(...)."
+            unmountFunction()
         })
 
         it('should NOT show loading spinner', () => {

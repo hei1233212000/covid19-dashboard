@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import { Country } from '../models/internal/country-internal-models'
 import CountryApi from '../api/CountryApi'
-import { Covid19Data } from '../models/internal/covid19-internal-models'
+import { Covid19FullData } from '../models/internal/covid19-internal-models'
 import { Covid19Api } from '../api/Covid19Api'
 import Covid19Dashboard from './Covid19Dashboard'
 import Covid19LoadingSpinner from './Covid19LoadingSpinner'
 import {
     Covid19DashboardContext,
     Covid19DashboardState,
-    RefreshCovid19DataFunction
+    RefreshCovid19FullDataFunction
 } from '../context/Covid19DashboardContext'
 import EnvVariables from '../env/EnvVariables'
 import Utils from '../utils/Utils'
 
 const Covid19DashboardContainer = (): JSX.Element => {
     const countries = useCountries()
-    const {covid19Data, refreshCovid19DataFunction} = useCovid19Data()
+    const {covid19FullData, refreshCovid19FullDataFunction} = useCovid19FullData()
     const lastUpdatedTimestamp = Utils.currentUtcTimestampInMilliseconds()
-    const covid19DashboardState = new Covid19DashboardState(countries, covid19Data, refreshCovid19DataFunction, lastUpdatedTimestamp)
+    const covid19DashboardState = new Covid19DashboardState(countries, covid19FullData, refreshCovid19FullDataFunction, lastUpdatedTimestamp)
     useAutoRefreshCovid19Data(covid19DashboardState, EnvVariables.refreshCovid19DataIntervalInMilliseconds)
 
     if (covid19DashboardState.ready) {
@@ -43,21 +43,21 @@ const useCountries = (): Country[] => {
     return countries
 }
 
-const useCovid19Data = (): Covid19DataAndCallback => {
-    const initialState: Covid19Data[] = []
-    const [covid19Data, setCovid19Data] = useState(initialState)
-    const refreshCovid19Data: RefreshCovid19DataFunction = (manualRefresh?: boolean) => {
+const useCovid19FullData = (): Covid19FullDataAndCallback => {
+    const initialState: Covid19FullData = {} as Covid19FullData
+    const [covid19FullData, setCovid19FullData] = useState(initialState)
+    const refreshCovid19Data: RefreshCovid19FullDataFunction = (manualRefresh?: boolean) => {
         if (manualRefresh) {
-            setCovid19Data([])
+            setCovid19FullData({} as Covid19FullData)
         }
         Covid19Api.findCovid19Data()
-            .then(data => setCovid19Data(data))
+            .then(data => setCovid19FullData(data))
     }
 
     useEffect(() => {
         refreshCovid19Data()
     }, [])
-    return new Covid19DataAndCallback(covid19Data, refreshCovid19Data)
+    return new Covid19FullDataAndCallback(covid19FullData, refreshCovid19Data)
 }
 
 const useAutoRefreshCovid19Data = (
@@ -67,7 +67,7 @@ const useAutoRefreshCovid19Data = (
     useEffect(() => {
         if (covid19DashboardState.ready) {
             const intervalId = setInterval(() => {
-                covid19DashboardState.refreshCovid19DataFunction()
+                covid19DashboardState.refreshCovid19FullDataFunction()
             }, refreshIntervalInMilliseconds)
             return () => clearInterval(intervalId)
         }
@@ -81,13 +81,13 @@ const unknownCountry = (): Country => {
     return new Country('', ' ', 'Others', '')
 }
 
-class Covid19DataAndCallback {
-    readonly covid19Data: Covid19Data[]
-    readonly refreshCovid19DataFunction: RefreshCovid19DataFunction
+class Covid19FullDataAndCallback {
+    readonly covid19FullData: Covid19FullData
+    readonly refreshCovid19FullDataFunction: RefreshCovid19FullDataFunction
 
-    constructor(covid19Data: Covid19Data[], refreshCovid19Data: RefreshCovid19DataFunction) {
-        this.covid19Data = covid19Data
-        this.refreshCovid19DataFunction = refreshCovid19Data
+    constructor(covid19FullData: Covid19FullData, refreshCovid19Data: RefreshCovid19FullDataFunction) {
+        this.covid19FullData = covid19FullData
+        this.refreshCovid19FullDataFunction = refreshCovid19Data
     }
 }
 

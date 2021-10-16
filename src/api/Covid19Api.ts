@@ -1,4 +1,4 @@
-import { Covid19Data } from '../models/internal/covid19-internal-models'
+import { Covid19Data, Covid19FullData } from '../models/internal/covid19-internal-models'
 import { Covid19Data as ExternalCovid19Data } from '../models/external/covid19-external-models'
 
 export class Covid19Api {
@@ -9,10 +9,10 @@ export class Covid19Api {
     static readonly numberOfConfirmsIndex = 7;
     static readonly numberOfCumulativeConfirmsIndex = 8;
 
-    static findCovid19Data = async (): Promise<Covid19Data[]> => {
+    static findCovid19Data = async (): Promise<Covid19FullData> => {
         const response = await fetch('https://data.covid-19.drunkard-pig.com/covid19-data.gzip')
         const externalCovid19Data = await response.json() as ExternalCovid19Data
-        return externalCovid19Data.result.pageContext.countryGroups
+        const covid19Data = externalCovid19Data.result.pageContext.countryGroups
             .flatMap(countryGroup => {
                 const countryCode = countryGroup.value
                 return countryGroup.data.rows.map(row => {
@@ -25,5 +25,6 @@ export class Covid19Api {
                     return new Covid19Data(region, countryCode, timestampInMillisecond, numberOfDeaths, numberOfCumulativeDeaths, numberOfConfirms, numberOfCumulativeConfirms)
                 })
             })
+        return new Covid19FullData(covid19Data)
     }
 }

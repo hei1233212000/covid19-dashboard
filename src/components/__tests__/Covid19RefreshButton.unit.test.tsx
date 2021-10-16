@@ -1,22 +1,22 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
 import Covid19RefreshButton from '../Covid19RefreshButton'
-import { RefreshCovid19DataFunction } from '../../context/Covid19DashboardContext'
+import { RefreshCovid19FullDataFunction } from '../../context/Covid19DashboardContext'
 import Utils from '../../utils/Utils'
 
 describe('Covid19RefreshButton', () => {
-    let mockedRefreshCovid19DataFunction: RefreshCovid19DataFunction
+    let mockedRefreshCovid19FullDataFunction: RefreshCovid19FullDataFunction
     const lastUpdatedTimeInMilliseconds = 1579046412345
     let capturedManualRefresh: boolean | undefined = undefined
     let refreshButton: HTMLElement
     const refreshIconText = 'Refresh'
 
     beforeEach(async () => {
-        mockedRefreshCovid19DataFunction = jest.fn((manualRefresh?: boolean) => {
+        mockedRefreshCovid19FullDataFunction = jest.fn((manualRefresh?: boolean) => {
             capturedManualRefresh = manualRefresh
         })
         render(<Covid19RefreshButton
-            refreshCovid19DataFunction={mockedRefreshCovid19DataFunction}
+            refreshCovid19FullDataFunction={mockedRefreshCovid19FullDataFunction}
             lastUpdatedTimeInMilliseconds={lastUpdatedTimeInMilliseconds}
         />)
         refreshButton = await screen.findByText(refreshIconText)
@@ -39,11 +39,11 @@ describe('Covid19RefreshButton', () => {
             refreshButton.click()
         })
 
-        it('should trigger the refreshCovid19DataFunction', () => {
-            expect(mockedRefreshCovid19DataFunction).toHaveBeenCalled()
+        it('should trigger the refreshCovid19FullDataFunction', () => {
+            expect(mockedRefreshCovid19FullDataFunction).toHaveBeenCalled()
         })
 
-        it('should refresh the covid19Data manually', () => {
+        it('should refresh the covid19FullData manually', () => {
             expect(capturedManualRefresh).toEqual(true)
         })
     })
