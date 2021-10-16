@@ -38,11 +38,11 @@ const Covid19Dashboard = (): JSX.Element => {
                             isPercentage={true}
             />
         </div>
-        <div className="p-col-12 p-md-3" data-testid="countries-areas-territories-counter">
-            <Covid19Counter title="Countries, areas or territories with cases" level={Covid19CounterLevel.Normal}
+        <div className="p-col-12 p-md-3" data-testid="vaccine-doses-counter">
+            <Covid19Counter title="Vaccine doses" level={Covid19CounterLevel.Success}
                             earliestRecordTimestamp={covid19DashboardState.earliestRecordTimestamp}
                             latestRecordTimestamp={covid19DashboardState.latestRecordTimestamp}
-                            count={covid19DashboardState.numberOfCountriesWithCases}
+                            count={covid19DashboardState.totalVaccineDoses}
             />
         </div>
         <div className="p-col-12 p-lg-6" data-testid="cumulative-cases">

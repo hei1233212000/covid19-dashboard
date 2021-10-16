@@ -53,7 +53,7 @@ describe('App integration test', () => {
         ['confirmed-cases-counter', 'Confirmed cases', '4'],
         ['confirmed-deaths-counter', 'Confirmed deaths', '1'],
         ['death-rate-counter', 'Death rate', '25.00%'],
-        ['countries-areas-territories-counter', 'Countries, areas or territories with cases', '2'],
+        ['vaccine-doses-counter', 'Vaccine doses', '12,299'],
     ])('when we look at the counter with id "%s"', (
         counterId: string,
         expectedCounterLabel: string,
@@ -378,7 +378,37 @@ const covid19Data: ExternalCovid19Data = {
                         ]
                     }
                 }
-            ]
+            ],
+            "rawDataSets": {
+                "vaccineData": {
+                    "data": [
+                        {
+                            "REPORT_COUNTRY": "Falkland Islands (Malvinas)",
+                            "ISO3": "FLK",
+                            "WHO_REGION": "AMRO",
+                            "DATE_UPDATED": "2021-04-14",
+                            "TOTAL_VACCINATIONS": 4407,
+                            "PERSONS_VACCINATED_1PLUS_DOSE": 2632,
+                            "PERSONS_FULLY_VACCINATED": 1775,
+                            "TOTAL_VACCINATIONS_PER100": 126.529,
+                            "PERSONS_VACCINATED_1PLUS_DOSE_PER100": 75.567,
+                            "PERSONS_FULLY_VACCINATED_PER100": 50.962
+                        },
+                        {
+                            "REPORT_COUNTRY": "Saint Helena",
+                            "ISO3": "SHN",
+                            "WHO_REGION": "AFRO",
+                            "DATE_UPDATED": "2021-05-05",
+                            "TOTAL_VACCINATIONS": 7892,
+                            "PERSONS_VACCINATED_1PLUS_DOSE": 4361,
+                            "PERSONS_FULLY_VACCINATED": 3531,
+                            "TOTAL_VACCINATIONS_PER100": 129.995,
+                            "PERSONS_VACCINATED_1PLUS_DOSE_PER100": 71.833,
+                            "PERSONS_FULLY_VACCINATED_PER100": 58.162
+                        }
+                    ]
+                }
+            }
         }
     }
 }

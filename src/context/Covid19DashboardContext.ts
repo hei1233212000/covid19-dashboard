@@ -1,5 +1,5 @@
 import { Country } from '../models/internal/country-internal-models'
-import { Covid19Data, Covid19FullData } from '../models/internal/covid19-internal-models'
+import { Covid19Data, Covid19FullData, Covid19VaccineData } from '../models/internal/covid19-internal-models'
 import Utils from '../utils/Utils'
 import { createContext } from 'react'
 
@@ -17,7 +17,7 @@ export class Covid19DashboardState {
     readonly latestRecordTimestamp: number
     readonly totalCumulativeConfirms: number
     readonly totalCumulativeDeaths: number
-    readonly numberOfCountriesWithCases: number
+    readonly totalVaccineDoses: number
     readonly ready: boolean
     readonly refreshCovid19FullDataFunction: RefreshCovid19FullDataFunction
     readonly lastUpdatedTimestamp: number
@@ -40,7 +40,7 @@ export class Covid19DashboardState {
         this.latestCovid19Data = this.extractLatestCovid19Data(this.covid19Data)
         this.totalCumulativeConfirms = this.findTotalCumulativeConfirms(this.latestCovid19Data)
         this.totalCumulativeDeaths = this.findTotalCumulativeDeaths(this.latestCovid19Data)
-        this.numberOfCountriesWithCases = this.findNumberOfCountriesWithCases(this.latestCovid19Data)
+        this.totalVaccineDoses = this.findTotalVaccineDoses(covid19FullData.covid19VaccineData)
         this.deathRate = 0
         if (this.totalCumulativeConfirms) {
             this.deathRate = this.totalCumulativeDeaths / this.totalCumulativeConfirms
@@ -70,8 +70,11 @@ export class Covid19DashboardState {
         }, 0)
     }
 
-    private findNumberOfCountriesWithCases = (covid19Data: Covid19Data[]): number => {
-        return covid19Data.length
+    private findTotalVaccineDoses = (covid19VaccineData: Covid19VaccineData[]): number => {
+        return covid19VaccineData
+            ? covid19VaccineData.map(d => d.totalVaccinations)
+                .reduce((prev, curr) => prev + curr, 0)
+            : 0
     }
 
     private findTotalCumulativeDeaths = (covid19Data: Covid19Data[]): number => {

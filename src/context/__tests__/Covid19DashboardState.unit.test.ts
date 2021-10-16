@@ -1,6 +1,6 @@
 import { Covid19DashboardState } from '../Covid19DashboardContext'
 import { Country } from '../../models/internal/country-internal-models'
-import { Covid19Data, Covid19FullData } from '../../models/internal/covid19-internal-models'
+import { Covid19Data, Covid19FullData, Covid19VaccineData } from '../../models/internal/covid19-internal-models'
 
 describe('Covid19DashboardState', () => {
     const nonEmptyCountries: Country[] = [
@@ -13,13 +13,17 @@ describe('Covid19DashboardState', () => {
         new Covid19Data('AMRO', 'US', 1582675200000, 1, 3, 3, 6),
         new Covid19Data('EMRO', 'AF', 1587502400000, 2, 2, 10, 10),
     ]
+    const nonEmptyCovid19VaccineData: Covid19VaccineData[] = [
+        new Covid19VaccineData('AMRO', 'US', 10, 0, 0, 0, 0, 0),
+        new Covid19VaccineData('EMRO', 'AF', 20, 0, 0, 0, 0, 0),
+    ]
     const dummyRefreshCovid19DataFunction: () => void = () => {}
     const fakeLastUpdatedTimestamp = 1
     let state: Covid19DashboardState
 
     describe('when countries and covid19FullData are provided', () => {
         beforeEach(() => {
-            state = new Covid19DashboardState(nonEmptyCountries, new Covid19FullData(nonEmptyCovid19Data), dummyRefreshCovid19DataFunction, fakeLastUpdatedTimestamp)
+            state = new Covid19DashboardState(nonEmptyCountries, new Covid19FullData(nonEmptyCovid19Data, nonEmptyCovid19VaccineData), dummyRefreshCovid19DataFunction, fakeLastUpdatedTimestamp)
         })
 
         it('should contain countries', () => {
@@ -55,7 +59,7 @@ describe('Covid19DashboardState', () => {
         })
 
         it('should extract numberOfCountriesWithCases', () => {
-            expect(state.numberOfCountriesWithCases).toEqual(2)
+            expect(state.totalVaccineDoses).toEqual(30)
         })
 
         it('should be ready', () => {
@@ -77,7 +81,7 @@ describe('Covid19DashboardState', () => {
         [nonEmptyCountries, []],
     ])('when countries is %o and covid19Data is %o', (countries: Country[], covid19Data: Covid19Data[]) => {
         beforeEach(() => {
-            state = new Covid19DashboardState(countries, new Covid19FullData(covid19Data), dummyRefreshCovid19DataFunction, fakeLastUpdatedTimestamp)
+            state = new Covid19DashboardState(countries, new Covid19FullData(covid19Data, []), dummyRefreshCovid19DataFunction, fakeLastUpdatedTimestamp)
         })
 
         it('should NOT be ready', () => {

@@ -10,6 +10,7 @@ export interface Result {
 
 export interface PageContext {
     countryGroups: (CountryGroupsEntity)[];
+    rawDataSets: RawDataSets;
 }
 
 export interface CountryGroupsEntity {
@@ -35,4 +36,25 @@ export interface MetricsEntity {
     type: string;
     dataType: string;
     aggregateFunction: string;
+}
+
+export interface RawDataSets {
+    vaccineData: VaccineData;
+}
+
+export interface VaccineData {
+    data: VaccineDataItem[];
+}
+
+export interface VaccineDataItem {
+    REPORT_COUNTRY: string;
+    ISO3: string;
+    WHO_REGION: string;
+    DATE_UPDATED: string;
+    TOTAL_VACCINATIONS: number | null;
+    PERSONS_VACCINATED_1PLUS_DOSE: number | null;
+    PERSONS_FULLY_VACCINATED: number | null;
+    TOTAL_VACCINATIONS_PER100: number | null;
+    PERSONS_VACCINATED_1PLUS_DOSE_PER100: number | null;
+    PERSONS_FULLY_VACCINATED_PER100: number | null;
 }

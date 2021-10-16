@@ -10,6 +10,10 @@
     padding: 7px 14px;
     @include border-radius($borderRadius);
 
+    &.success {
+      background-color: $successColor;
+    }
+
     &.normal {
       background-color: $normalColor;
     }

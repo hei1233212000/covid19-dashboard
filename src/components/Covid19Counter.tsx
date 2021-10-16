@@ -4,6 +4,7 @@ import './Covid19Counter.scss'
 import Utils from '../utils/Utils'
 
 export enum Covid19CounterLevel {
+    Success,
     Normal,
     Warning,
     Danger
@@ -36,6 +37,8 @@ const Covid19Counter = (props: Covid19CounterProps): JSX.Element => {
 
 const generateCountColorCssClass = (type: Covid19CounterLevel) => {
     switch (type) {
+        case Covid19CounterLevel.Success:
+            return 'success'
         case Covid19CounterLevel.Normal:
             return 'normal'
         case Covid19CounterLevel.Warning:
