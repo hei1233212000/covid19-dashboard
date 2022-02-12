@@ -3,6 +3,9 @@ node_js:
   - "stable"
 install:
   - yarn install --frozen-lockfile
+before_script:
+  # this is a tmp fix for https://github.com/webpack/webpack/issues/14532
+  - export NODE_OPTIONS=--openssl-legacy-provider
 script:
   - yarn test:ci
   - yarn build
