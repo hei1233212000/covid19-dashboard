@@ -147,268 +147,70 @@ describe('App integration test', () => {
 })
 
 const covid19Data: ExternalCovid19Data = {
-    "result": {
-        "pageContext": {
-            "countryGroups": [
-                {
-                    "dimension": {
-                        "name": "Country",
-                        "type": "STRING",
-                        "dataType": "STRING"
-                    },
-                    "value": "US",
-                    "data": {
-                        "metrics": [
-                            {
-                                "name": "Deaths",
-                                "type": "NUMBER",
-                                "dataType": "NUMERIC",
-                                "aggregateFunction": "SUM"
-                            },
-                            {
-                                "name": "Cumulative Deaths",
-                                "type": "NUMBER",
-                                "dataType": "NUMERIC",
-                                "aggregateFunction": "SUM"
-                            },
-                            {
-                                "name": "Deaths Last 7 Days",
-                                "type": "NUMBER",
-                                "dataType": "NUMERIC",
-                                "aggregateFunction": "SUM"
-                            },
-                            {
-                                "name": "Deaths Last 7 Days Change",
-                                "type": "NUMBER",
-                                "dataType": "NUMERIC",
-                                "aggregateFunction": "SUM"
-                            },
-                            {
-                                "name": "Deaths Per Million",
-                                "type": "NUMBER",
-                                "dataType": "NUMERIC",
-                                "aggregateFunction": "SUM"
-                            },
-                            {
-                                "name": "Confirmed",
-                                "type": "NUMBER",
-                                "dataType": "NUMERIC",
-                                "aggregateFunction": "SUM"
-                            },
-                            {
-                                "name": "Cumulative Confirmed",
-                                "type": "NUMBER",
-                                "dataType": "NUMERIC",
-                                "aggregateFunction": "SUM"
-                            },
-                            {
-                                "name": "Cases Last 7 Days",
-                                "type": "NUMBER",
-                                "dataType": "NUMERIC",
-                                "aggregateFunction": "SUM"
-                            },
-                            {
-                                "name": "Cases Last 7 Days Change",
-                                "type": "NUMBER",
-                                "dataType": "NUMERIC",
-                                "aggregateFunction": "SUM"
-                            },
-                            {
-                                "name": "Cases Per Million",
-                                "type": "NUMBER",
-                                "dataType": "NUMERIC",
-                                "aggregateFunction": "SUM"
-                            }
-                        ],
-                        "dimensions": [
-                            {
-                                "name": "day",
-                                "type": "TIMESTAMP",
-                                "dataType": "STRING"
-                            },
-                            {
-                                "name": "Region",
-                                "type": "STRING",
-                                "dataType": "STRING"
-                            }
-                        ],
-                        "rows": [
-                            [
-                                1579478400000,
-                                "AMRO",
-                                0, // deaths
-                                0, // Cumulative Deaths
-                                0, // Deaths Last 7 Days
-                                0, // Deaths Last 7 Days Change
-                                0, // Deaths Per Million
-                                1, // Confirmed
-                                1, // Cumulative Confirmed
-                                0, // Cases Last 7 Days
-                                0, // Cases Last 7 Days Change
-                                0 // Cases Per Million
-                            ],
-                            [
-                                1579564800000,
-                                "AMRO",
-                                0, // deaths
-                                0, // Cumulative Deaths
-                                0, // Deaths Last 7 Days
-                                0, // Deaths Last 7 Days Change
-                                0, // Deaths Per Million
-                                0, // Confirmed
-                                1, // Cumulative Confirmed
-                                0, // Cases Last 7 Days
-                                0, // Cases Last 7 Days Change
-                                0 // Cases Per Million
-                            ]
-                        ]
-                    }
-                },
-                {
-                    "dimension": {
-                        "name": "Country",
-                        "type": "STRING",
-                        "dataType": "STRING"
-                    },
-                    "value": "JP",
-                    "data": {
-                        "metrics": [
-                            {
-                                "name": "Deaths",
-                                "type": "NUMBER",
-                                "dataType": "NUMERIC",
-                                "aggregateFunction": "SUM"
-                            },
-                            {
-                                "name": "Cumulative Deaths",
-                                "type": "NUMBER",
-                                "dataType": "NUMERIC",
-                                "aggregateFunction": "SUM"
-                            },
-                            {
-                                "name": "Deaths Last 7 Days",
-                                "type": "NUMBER",
-                                "dataType": "NUMERIC",
-                                "aggregateFunction": "SUM"
-                            },
-                            {
-                                "name": "Deaths Last 7 Days Change",
-                                "type": "NUMBER",
-                                "dataType": "NUMERIC",
-                                "aggregateFunction": "SUM"
-                            },
-                            {
-                                "name": "Deaths Per Million",
-                                "type": "NUMBER",
-                                "dataType": "NUMERIC",
-                                "aggregateFunction": "SUM"
-                            },
-                            {
-                                "name": "Confirmed",
-                                "type": "NUMBER",
-                                "dataType": "NUMERIC",
-                                "aggregateFunction": "SUM"
-                            },
-                            {
-                                "name": "Cumulative Confirmed",
-                                "type": "NUMBER",
-                                "dataType": "NUMERIC",
-                                "aggregateFunction": "SUM"
-                            },
-                            {
-                                "name": "Cases Last 7 Days",
-                                "type": "NUMBER",
-                                "dataType": "NUMERIC",
-                                "aggregateFunction": "SUM"
-                            },
-                            {
-                                "name": "Cases Last 7 Days Change",
-                                "type": "NUMBER",
-                                "dataType": "NUMERIC",
-                                "aggregateFunction": "SUM"
-                            },
-                            {
-                                "name": "Cases Per Million",
-                                "type": "NUMBER",
-                                "dataType": "NUMERIC",
-                                "aggregateFunction": "SUM"
-                            }
-                        ],
-                        "dimensions": [
-                            {
-                                "name": "day",
-                                "type": "TIMESTAMP",
-                                "dataType": "STRING"
-                            },
-                            {
-                                "name": "Region",
-                                "type": "STRING",
-                                "dataType": "STRING"
-                            }
-                        ],
-                        "rows": [
-                            [
-                                1578960000000,
-                                "WPRO",
-                                0, // deaths
-                                0, // Cumulative Deaths
-                                0, // Deaths Last 7 Days
-                                0, // Deaths Last 7 Days Change
-                                0, // Deaths Per Million
-                                1, // Confirmed
-                                1, // Cumulative Confirmed
-                                0, // Cases Last 7 Days
-                                0, // Cases Last 7 Days Change
-                                0 // Cases Per Million
-                            ],
-                            [
-                                1579046400000,
-                                "WPRO",
-                                1, // deaths
-                                1, // Cumulative Deaths
-                                0, // Deaths Last 7 Days
-                                0, // Deaths Last 7 Days Change
-                                0, // Deaths Per Million
-                                2, // Confirmed
-                                3, // Cumulative Confirmed
-                                0, // Cases Last 7 Days
-                                0, // Cases Last 7 Days Change
-                                0 // Cases Per Million
-                            ]
-                        ]
-                    }
-                }
+    covid19Data: {
+        headers: ['region', 'countryCode', 'timestampInMs', 'newDeaths', 'cumulativeDeaths', 'newCases', 'cumulativeCases'],
+        data: [
+            [
+                'AMRO',
+                'US',
+                1579478400000,
+                0, // deaths
+                0, // Cumulative Deaths
+                1, // Confirmed
+                1  // Cumulative Confirmed
             ],
-            "rawDataSets": {
-                "vaccineData": {
-                    "data": [
-                        {
-                            "REPORT_COUNTRY": "Falkland Islands (Malvinas)",
-                            "ISO3": "FLK",
-                            "WHO_REGION": "AMRO",
-                            "DATE_UPDATED": "2021-04-14",
-                            "TOTAL_VACCINATIONS": 4407,
-                            "PERSONS_VACCINATED_1PLUS_DOSE": 2632,
-                            "PERSONS_FULLY_VACCINATED": 1775,
-                            "TOTAL_VACCINATIONS_PER100": 126.529,
-                            "PERSONS_VACCINATED_1PLUS_DOSE_PER100": 75.567,
-                            "PERSONS_FULLY_VACCINATED_PER100": 50.962
-                        },
-                        {
-                            "REPORT_COUNTRY": "Saint Helena",
-                            "ISO3": "SHN",
-                            "WHO_REGION": "AFRO",
-                            "DATE_UPDATED": "2021-05-05",
-                            "TOTAL_VACCINATIONS": 7892,
-                            "PERSONS_VACCINATED_1PLUS_DOSE": 4361,
-                            "PERSONS_FULLY_VACCINATED": 3531,
-                            "TOTAL_VACCINATIONS_PER100": 129.995,
-                            "PERSONS_VACCINATED_1PLUS_DOSE_PER100": 71.833,
-                            "PERSONS_FULLY_VACCINATED_PER100": 58.162
-                        }
-                    ]
-                }
-            }
-        }
+            [
+                'AMRO',
+                'US',
+                1579564800000,
+                0, // deaths
+                0, // Cumulative Deaths
+                0, // Confirmed
+                1  // Cumulative Confirmed
+            ],
+            [
+                'WPRO',
+                'JP',
+                1578960000000,
+                0, // deaths
+                0, // Cumulative Deaths
+                1, // Confirmed
+                1  // Cumulative Confirmed
+            ],
+            [
+                'WPRO',
+                'JP',
+                1579046400000,
+                1, // deaths
+                1, // Cumulative Deaths
+                2, // Confirmed
+                3  // Cumulative Confirmed
+            ]
+        ]
+    },
+    vaccinationData: {
+        headers: ['region','countryCode','totalVaccinations','personsVaccinatedOnePlusDose','personsFullyVaccinated','totalVaccinationsPerHundred','personsVaccinatedOnePlusDosePerHundred','personsFullyVaccinatedPerHundred'],
+        data: [
+            [
+                'AMRO',
+                'FLK',
+                4407,    // totalVaccinations
+                2632,    // personsVaccinatedOnePlusDose
+                1775,    // personsFullyVaccinated
+                126.529, // totalVaccinationsPerHundred
+                75.567,  // personsVaccinatedOnePlusDosePerHundred
+                50.962   // personsFullyVaccinatedPerHundred
+            ],
+            [
+                'AFRO',
+                'SHN',
+                7892,    // totalVaccinations
+                4361,    // personsVaccinatedOnePlusDose
+                3531,    // personsFullyVaccinated
+                129.995, // totalVaccinationsPerHundred
+                71.833,  // personsVaccinatedOnePlusDosePerHundred
+                58.162   // personsFullyVaccinatedPerHundred
+            ]
+        ]
     }
 }
