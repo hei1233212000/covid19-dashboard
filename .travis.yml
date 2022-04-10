@@ -7,7 +7,7 @@ script:
   - yarn test:ci
   - yarn build
 before_deploy:
-  - npm install -g serverless
+  - npm install -g serverless@"<3.0.0"
 deploy:
   provider: script
   script: sls client deploy --no-confirm --no-config-change --no-policy-change -no-cors-change
